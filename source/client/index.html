@@ -18,13 +18,15 @@
 				<li><a href="./categories" id="categories_btn">Categories</a></li>
 				<li><a href="./login" id="login_btn">Login</a></li>
 				<li><a href="./login" id="signUp_btn">Sign Up</a></li>
-				<li><a href="./categories" id="new_category_btn">New Categories</a></li>
-				<li><a href="./items" id="new_item_btn">New Item</a></li>
+				
 			</ul>	
 		</div>
+	
 		<div id="content">
-			<div id="list_items_container"></div>
+			<div id="list_categories_Name_container"></div>
+		
 			<div id="list_categories_container"></div>
+			<div id="list_items_container"></div>
 			<div id="single_item_container">
 				<div id="single_item_name"></div>
 				<div id="single_item_desc"></div>
@@ -57,15 +59,22 @@
 				<button class="create" onclick="login(event)">Login</button>
 			</div>	
 			<div id="signUp_container">
-				<div class="block"><label>username:</label><input type="text" id="username"/></div>
+				<div class="block"><label>first name:</label><input type="text" id="fname"/></div>
+				<div class="block"><label>last name:</label><input type="text" id="lname"/></div>
 				<div class="block"><label>email:</label><input type="text" id="email"/></div>
 				<div class="separator"></div>
-				<div class="block"><label>password:</label><input type="password" id="password"/></div>
+				<div class="block"><label>address:</label><input type="text" id="street"/></div>
+				<div class="block"><label>city:</label><input type="text" id="city"/></div>
+				<div class="block"><label>province:</label><input type="text" id="province"/></div>
+				<div class="block"><label>country:</label><input type="text" id="country"/></div>
+				<div class="block"><label>postal Code:</label><input type="text" id="postalCode"/></div>
+				<div class="separator"></div>
+				<div class="block"><label>username:</label><input type="text" id="usernameSign"/></div>
+				<div class="block"><label>password:</label><input type="password" id="passwordSign"/></div>
 				<button class="create" onclick="signUp(event)">Login</button>
 			</div>			
 		</div>
-		<div id="footer">
-		</div>
+		<div id="footer"></div>
 	</div>
 </body>
 </html>

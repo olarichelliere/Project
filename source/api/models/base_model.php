@@ -127,7 +127,7 @@ class BaseModel
         return $this->getOne($insertedId);
     }
 
-    // TODO: Update the code here to accomodate `create`
+
     
     // TODO: Update the code here to accomodate `delete`
 

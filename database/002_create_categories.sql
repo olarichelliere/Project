@@ -13,5 +13,5 @@ CREATE TABLE `categories` (
 #
 # Insert some values to the categories table
 #
-INSERT INTO `categories` (`id`, `name`, `description`) VALUES (1, 'Books','Books and Readings');
-INSERT INTO `categories` (`id`, `name`, `description`) VALUES (2, 'Audios','CDs and Audio recordings');
+INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (1, 'Books','Books and Readings','w7.jpg');
+INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (2, 'Audios','CDs and Audio recordings','w8.jpg');

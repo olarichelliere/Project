@@ -17,5 +17,4 @@ CREATE TABLE `users` (
   UNIQUE INDEX `username_UNIQUE` (`username` ASC));
 
 
-INSERT INTO `users` (`id`, `username`, `password`,`isAdmin`)  VALUES (1,'admin','1234',1);
-INSERT INTO `users` (`id`, `username`, `password`,`isAdmin`)  VALUES (2,'user','1234',0);
+

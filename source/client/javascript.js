@@ -74,20 +74,20 @@ function showItems(event) {
 
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-    htmlContainer.style.display = "inline-block";
-
+    //htmlContainer.style.display = "inline";
+    //htmlContainer.style.cssFloat = "left";
 
     httpRequest('GET', '/items', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
             htmlContainer.innerHTML += 
                 `<div class="item_box">
-                    
+                    <a href="#" onclick="showItem(event, ${item['id']})">
                     <div class="center"><img src="${baseURL}/../images/${item['image']}" width=150 height=150 /></div>
-                    <div class="title"><a href="#" onclick="showItem(event, ${item['id']})">${item["name"]}</a></div>
+                    <div class="title">${item["name"]}</div>
                     <div class="description">${item["descriptionShort"]}</div>
                     <div class="price">$${item["price"]}</div>
-
+                    </a>
                 </div>`;
         }
     });
@@ -100,8 +100,8 @@ function showCategories(event) {
 
     var htmlContainer = document.getElementById('list_categories_container');
     htmlContainer.innerHTML = '';
-    htmlContainer.style.display = "inline-block";
-
+    htmlContainer.style.display = "inline";
+    //htmlContainer.style.cssFloat = "left";
     
 
     httpRequest('GET', '/categories', undefined, function (data) {
@@ -126,7 +126,8 @@ function filter(event,id){
 
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-    htmlContainer.style.display = "inline-block";
+    //htmlContainer.style.display = "inline";
+    //htmlContainer.style.cssFloat = "left";
 
 
     httpRequest('GET', '/items?categoryid='+id, undefined, function (data) {
@@ -144,7 +145,22 @@ function filter(event,id){
         }
     });
 }
+function populateCategoriesList(){
+    var htmlContainer = document.getElementById('list_categories_Name_container');
 
+    httpRequest('GET', '/categories', undefined, function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var category = data[i];
+            htmlContainer.innerHTML += 
+                `<div class="category">
+                    <a href="#" onclick="filter(event, ${category['id']})">
+                        <div>${category["name"]}</div>
+                        <div>${category["description"]}</div>
+                    </a>
+                </div>`;
+        }
+    });
+}
  
 function showItem(event, id) {
     event.preventDefault();
@@ -278,14 +294,15 @@ function login(event) {
     });
 }
 function adminLayout(){
-  
+        
         var htmlContainer = document.getElementById('ulNav');
         htmlContainer.innerHTML +=
 
         '<li><a href="./categories" id="new_category_btn">New Categories</a></li>'
         '<li><a href="./items" id="new_item_btn">New Item</a></li>';
     
-
+        document.getElementById("new_item_btn").addEventListener('click', showNewItem, false);
+        document.getElementById("new_category_btn").addEventListener('click', showNewCategory, false);
 }
 
 
@@ -304,17 +321,31 @@ function showSignUp(event) {
 function signUp(event) {
     event.preventDefault();
     
-    var username = document.getElementById("username").value;
-    var pass = document.getElementById("password").value;
+    var username = document.getElementById("usernameSign").value;
+    var password = document.getElementById("passwordSign").value;
     var email = document.getElementById("email").value;
+    var fname = document.getElementById("fname").value;
+    var lname = document.getElementById("lname").value;
+    var street = document.getElementById("street").value;
+    var city = document.getElementById("city").value;
+    var province = document.getElementById("province").value;
+    var country = document.getElementById("country").value;
+    var postalCode = document.getElementById("postalCode").value;
 
     var data = {
         username: username,
         email: email,
-        password: pass,
-        isAdmin:0
+        password: password,
+        firstName: fname,
+        lastName: lname,
+        street: street,
+        city: city,
+        province: province,
+        country: country,
+        postalCode: postalCode,
+        isAdmin: 0
     }
-
+    console.log(data);
 
 
 
@@ -345,10 +376,12 @@ function loaded() {
     /// Button Listeners
     document.getElementById("items_btn").addEventListener('click', showItems, false);
     document.getElementById("categories_btn").addEventListener('click', showCategories, false);
-    document.getElementById("new_item_btn").addEventListener('click', showNewItem, false);
-    document.getElementById("new_category_btn").addEventListener('click', showNewCategory, false);
+    
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
 
-    document.getElementById("login_btn").click();
+    //document.getElementById("login_btn").click();
+    document.getElementById("categories_btn").click();
+    document.getElementById("items_btn").click();
+    populateCategoriesList();
 }
