@@ -69,17 +69,14 @@ body{
 
 */
 #list_categories_Name_container{
-	float: left;
+	position: fixed;
+	top: 50px;left:0;bottom: 0;
 	width: 150px;
 	height: 100%;
 	padding: 5px;	
 }
 
-#content::after {
-    content: "";
-    clear: both;
-    
-}
+
 
 .category{
 	color: black;
@@ -88,12 +85,18 @@ body{
 }
 
 #content{
-
+	
 	margin: 0 30px 30px;
 /*	background: white;
 	padding: 20px;
 	width:94%;*/
     min-height: 20px;
+}
+
+#content::after {
+    content: "";
+    clear: both;
+    
 }
 
 #content a{
@@ -119,9 +122,9 @@ body{
 }
 
 #list_items_container{
-	/*float: left;*/
+	float: left;
 	top: 0;
-	left: 150px;
+	left: 250px;
 }
 
 #list_items_container .title{

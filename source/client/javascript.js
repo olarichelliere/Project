@@ -74,7 +74,7 @@ function showItems(event) {
 
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-    //htmlContainer.style.display = "inline";
+    htmlContainer.style.display = "inline";
     //htmlContainer.style.cssFloat = "left";
 
     httpRequest('GET', '/items', undefined, function (data) {
@@ -126,7 +126,7 @@ function filter(event,id){
 
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-    //htmlContainer.style.display = "inline";
+    htmlContainer.style.display = "inline";
     //htmlContainer.style.cssFloat = "left";
 
 
@@ -289,7 +289,7 @@ function login(event) {
 
 
         if(isAdmin==1){
-            //adminLayout();
+            adminLayout();
         };
     });
 }
@@ -298,7 +298,9 @@ function adminLayout(){
         var htmlContainer = document.getElementById('ulNav');
         htmlContainer.innerHTML +=
 
-        '<li><a href="./categories" id="new_category_btn">New Categories</a></li>'
+        '<li><a href="./categories" id="new_category_btn">New Categories</a></li>';
+        
+        htmlContainer.innerHTML +=
         '<li><a href="./items" id="new_item_btn">New Item</a></li>';
     
         document.getElementById("new_item_btn").addEventListener('click', showNewItem, false);
