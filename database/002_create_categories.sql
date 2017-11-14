@@ -13,5 +13,6 @@ CREATE TABLE `categories` (
 #
 # Insert some values to the categories table
 #
-INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (1, 'Books','Books and Readings','w7.jpg');
-INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (2, 'Audios','CDs and Audio recordings','w8.jpg');
+INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (1, 'Analog','clock-face with 12 hours, an hour hand, and a minute hand','analog.svg');
+INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (2, 'Digital','numbers on the watch','digital.png');
+INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (3, 'Men','watch for men','men.png');

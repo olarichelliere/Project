@@ -31,6 +31,7 @@ class UserModel extends BaseModel
 
     public function getUserByToken($token) 
     {
+        //users.id
         $query = "SELECT * FROM users JOIN tokens ON users.id = tokens.userID WHERE token = '$token' ";
         $result = $this->db_connection->query($query);
 

@@ -12,7 +12,7 @@ CREATE TABLE `orders` (
   `shipToCountry` varchar(255) NOT NULL DEFAULT '',
   `shipToPostalCode` varchar(255) NOT NULL DEFAULT '',
   `status` varchar(255) NOT NULL DEFAULT '',
-  `quantity` int(11) NOT NULL DEFAULT 0,
+  `totalPrice` varchar(255) NOT NULL DEFAULT '',
   `datetimeAdded` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

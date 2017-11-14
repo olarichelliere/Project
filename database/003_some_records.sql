@@ -1,8 +1,1 @@
-
-
-INSERT INTO `items` (`id`, `name`, `descriptionShort`,`image`, `price`) VALUES (3,'Call of Duty','The famous video game','w3.jpg',80);
-INSERT INTO `items` (`id`, `name`, `descriptionShort`,`image`, `price`) VALUES (4,'FIFA 2017','The famous video game','w4.jpg',80);
-INSERT INTO `items` (`id`, `name`, `descriptionShort`, `image`,`price`) VALUES (5,'Super Mario','The famous video game','w5.jpg',80);
-
-INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (3, 'Toys & Games','Toys and Games','w9.jpg');
-INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (4, 'Video Games','Video Games','w10.jpg');
+INSERT INTO `categories` (`id`, `name`, `description`,`image`) VALUES (4, 'Women','watch for women','women.png');

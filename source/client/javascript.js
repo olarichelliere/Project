@@ -72,21 +72,55 @@ function showItems(event) {
     
     hideAllSections();
 
+    var htmlContainer = document.getElementById('list_container');
+
+    htmlContainer.style.display = "inline-flex";
+
+
+    populateCategoriesList(event);
+    populateItemsList(event);
+}
+
+function populateCategoriesList(event){
+    var htmlContainer = document.getElementById('list_categories_Name_container');
+    htmlContainer.innerHTML = '';
+
+
+    htmlContainer.innerHTML +=
+        `<div class="searchItem">
+        <input type="text" id="searchItem"/></div>
+        </div>`;
+
+
+    httpRequest('GET', '/categories', undefined, function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var category = data[i];
+            htmlContainer.innerHTML += 
+                `<div class="category">
+                    <a href="#" onclick="filter(event, ${category['id']})">
+                        <div class="name">${category["name"]}</div>
+                        <div class="description">${category["description"]}</div>
+                    </a>
+                </div>`;
+        }
+    });
+}
+
+function populateItemsList(event){
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-    htmlContainer.style.display = "inline";
-    //htmlContainer.style.cssFloat = "left";
+
 
     httpRequest('GET', '/items', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
-            htmlContainer.innerHTML += 
+            htmlContainer.innerHTML +=
                 `<div class="item_box">
                     <a href="#" onclick="showItem(event, ${item['id']})">
-                    <div class="center"><img src="${baseURL}/../images/${item['image']}" width=150 height=150 /></div>
-                    <div class="title">${item["name"]}</div>
-                    <div class="description">${item["descriptionShort"]}</div>
-                    <div class="price">$${item["price"]}</div>
+                        <div class="center"><img src="${baseURL}/../images/${item['image']}"/></div>
+                        <div class="title">${item["name"]}</div>
+                        <div class="description">${item["descriptionShort"]}</div>
+                        <div class="price">$${item["price"]}</div>
                     </a>
                 </div>`;
         }
@@ -97,20 +131,19 @@ function showCategories(event) {
     event.preventDefault();
     
     hideAllSections();
-
+  
     var htmlContainer = document.getElementById('list_categories_container');
     htmlContainer.innerHTML = '';
     htmlContainer.style.display = "inline";
-    //htmlContainer.style.cssFloat = "left";
     
 
     httpRequest('GET', '/categories', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var category = data[i];
-            htmlContainer.innerHTML += 
+            htmlContainer.innerHTML +=
                 `<div class="category_box">
-                    <a href="#" onclick="filter(event, ${category['id']})">
-                        <div class="center"><img src="${baseURL}/../images/${category['image']}" width=150 height=150 /></div>
+                    <a href="#" onclick="filterByCategory(event,${category['id']})">
+                        <div class="center"><img src="${baseURL}/../images/${category['image']}"/></div>
                         <div class="title">${category["name"]}</div>
                         <div class="description">${category["description"]}</div>
                     </a>
@@ -119,48 +152,42 @@ function showCategories(event) {
     });
 
 }
-function filter(event,id){
+function filterByCategory(event,id){
     event.preventDefault();
     
     hideAllSections();
 
+    var htmlContainer = document.getElementById('list_container');
+
+    htmlContainer.style.display = "inline";
+
+    populateCategoriesList(event);
+    filter(event,id);
+}
+
+function filter(event,id){
+    event.preventDefault();
+    
+
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-    htmlContainer.style.display = "inline";
-    //htmlContainer.style.cssFloat = "left";
-
 
     httpRequest('GET', '/items?categoryid='+id, undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
             htmlContainer.innerHTML += 
                 `<div class="item_box">
-                    <a href="#" onclick="showItem(event, ${item['id']})">
-                        <div class="center"><img src="${baseURL}/../images/${item['image']}" width=150 height=150 /></div>
-                        <div class="title">${item["name"]}</div>
-                        <div class="description">${item["descriptionShort"]}</div>
-                        <div class="price">$${item["price"]}</div>
-                    </a>
-                </div>`;
+                <a href="#" onclick="showItem(event, ${item['id']})">
+                    <div class="center"><img src="${baseURL}/../images/${item['image']}"/></div>
+                    <div class="title">${item["name"]}</div>
+                    <div class="description">${item["descriptionShort"]}</div>
+                    <div class="price">$${item["price"]}</div>
+                </a>
+            </div>`;
         }
     });
 }
-function populateCategoriesList(){
-    var htmlContainer = document.getElementById('list_categories_Name_container');
 
-    httpRequest('GET', '/categories', undefined, function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var category = data[i];
-            htmlContainer.innerHTML += 
-                `<div class="category">
-                    <a href="#" onclick="filter(event, ${category['id']})">
-                        <div>${category["name"]}</div>
-                        <div>${category["description"]}</div>
-                    </a>
-                </div>`;
-        }
-    });
-}
  
 function showItem(event, id) {
     event.preventDefault();
@@ -168,14 +195,16 @@ function showItem(event, id) {
     hideAllSections();
     
     var htmlContainer = document.getElementById('single_item_container');
-    htmlContainer.style.display = "block";
-    
-    
+    htmlContainer.style.display = "inline-block";
     
     httpRequest('GET', '/items/' + id, undefined, function (data) {
+        document.getElementById('single_item_image').innerHTML =  `<img src="${baseURL}/../images/${data.image}"/>`;
         document.getElementById('single_item_name').innerHTML = data.name;
         document.getElementById('single_item_desc').innerHTML = data.descriptionShort;
+        document.getElementById('single_item_descLong').innerHTML = data.descriptionLong;
         document.getElementById('single_item_price').innerHTML = '$' + data.price;
+
+        document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event, ${data.id})">Add to my cart</button>`;
     });
 }
 
@@ -255,6 +284,65 @@ function createCategory(event){
     });
 }
 
+function addToCart(event, item_id){
+    event.preventDefault();
+    
+    //var quantity = document.getElementById("new_item_quantity").value;
+    var quantity=1;
+
+    var data = {
+        itemId: item_id
+    }
+  
+    httpRequest('POST', '/cart/', data, function (newRecord) {
+        console.log('Successful added to cart', newRecord);
+    });
+}
+
+function showCart(event){
+    event.preventDefault();
+     
+    hideAllSections();
+
+    var htmlContainer = document.getElementById('cart_container');
+    htmlContainer.style.display = "inline-table";
+
+    htmlContainer.innerHTML = 'My Cart';
+
+    httpRequest('GET', '/cart/', undefined, function (data) {
+        for (var i = 0; i < data['items'].length; i++) {
+            var item = data['items'][i];
+            htmlContainer.innerHTML += 
+                `<div class="cart_box">
+                    <div class="thumbnail"><img src="${baseURL}/../images/${item['image']}"/></div>   
+                    <div class="title">Quantity: ${item["quantity"]}</div>
+                    <div class="name">${item["name"]}</div>
+                    <div class="price">$${item["price"]}</div>
+
+            </div>`;
+        }    
+        htmlContainer.innerHTML += `<div id="totalAmount" class="total">Total: ${data['total']}</div>`;
+        htmlContainer.innerHTML += `<button class="create" onclick="proceedToPayment(event,${data['total']})">Proceed To Payment</button>`;
+    });
+}
+
+function proceedToPayment(event, total){
+   
+    event.preventDefault();
+
+    // if payment is succeful create order and delete cart
+
+
+    var data = {
+        totalPrice: total
+    }
+
+    // not finished, need code from school computer
+    httpRequest('POST', '/order/', data, function () {
+        console.log('Successful creation of new order');
+    });
+}
+
 function showLogin(event) {
     event.preventDefault();
     
@@ -286,13 +374,27 @@ function login(event) {
 
         setCookie('token', userToken, 1);
         setCookie('isAdmin', isAdmin, 1);
+        
+        getFirstNameByID(response.id);
+    });
+    if(isAdmin==1){
+        adminLayout();
+    };
+    document.getElementById("items_btn").click();
+}
 
+function getFirstNameByID(){
+    var htmlContainer = document.getElementById('logInUser');
 
-        if(isAdmin==1){
-            adminLayout();
-        };
+    htmlContainer.innerHTML = '';
+
+    httpRequest('GET', '/users/', undefined, function (data) {
+
+            htmlContainer.innerHTML = `Hi ${data.firstName}`;
+            console.log('Successful creation of users First name');      
     });
 }
+
 function adminLayout(){
         
         var htmlContainer = document.getElementById('ulNav');
@@ -345,7 +447,7 @@ function signUp(event) {
         province: province,
         country: country,
         postalCode: postalCode,
-        isAdmin: 0
+        isAdmin: 0  
     }
     console.log(data);
 
@@ -360,17 +462,20 @@ function signUp(event) {
         setCookie('token', userToken, 1);
         setCookie('isAdmin', isAdmin, 1);
     });
+
+    document.getElementById("items_btn").click();
 }
 
 
 function hideAllSections() {
-    document.getElementById("list_items_container").style.display = "none";
+    document.getElementById("list_container").style.display = "none";
     document.getElementById("list_categories_container").style.display = "none";
     document.getElementById("single_item_container").style.display = "none";
     document.getElementById("new_item_container").style.display = "none";
     document.getElementById("new_category_container").style.display = "none";
     document.getElementById("login_container").style.display = "none";
     document.getElementById("signUp_container").style.display = "none";
+    document.getElementById("cart_container").style.display = "none";
 }
 
 
@@ -378,12 +483,13 @@ function loaded() {
     /// Button Listeners
     document.getElementById("items_btn").addEventListener('click', showItems, false);
     document.getElementById("categories_btn").addEventListener('click', showCategories, false);
-    
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
+    document.getElementById("cart_btn").addEventListener('click', showCart, false);
+    proceedToPayment
 
     //document.getElementById("login_btn").click();
     document.getElementById("categories_btn").click();
     document.getElementById("items_btn").click();
-    populateCategoriesList();
+    
 }

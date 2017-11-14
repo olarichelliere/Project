@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>E-Commerce - PHP / MySQL II</title>
+	<title>E-Commerce -Atuleur</title>
 	<script src="cookies.js"></script>
 	<script src="javascript.js"></script>
+	<script src="payment.js"></script>
 	<link rel="stylesheet" href="./style.css" type="text/css" />
 </head>
 <body onload="loaded()">
 	<div id="page">
 		<div id="logo">
-			<h1><a href="/" id="logoLink">PHP / MYSQL II</a></h1>
+			<h1><a href="./" id="logoLink">atuleur</a></h1>
+			<h5>luxury watches</h5>
 		</div>
 		<div id="nav">
 			<ul id="ulNav">
@@ -18,20 +20,28 @@
 				<li><a href="./categories" id="categories_btn">Categories</a></li>
 				<li><a href="./login" id="login_btn">Login</a></li>
 				<li><a href="./login" id="signUp_btn">Sign Up</a></li>
+				<li><a href="./cart" id="cart_btn">Cart</a></li>
 				
-			</ul>	
+			</ul>
+			<div id="logInUser"></div>	
 		</div>
-	
-		<div id="content">
-			
 		
-			<div id="list_categories_container"><div id="list_categories_Name_container"></div></div>
-			<div id="list_items_container"></div>
-			<div id="single_item_container">
-				<div id="single_item_name"></div>
-				<div id="single_item_desc"></div>
-				<div id="single_item_price"></div>
+		<div id="content">
+			<div id="list_container">
+				<div id="list_categories_Name_container"></div>
+				<div id="list_items_container"></div>
 			</div>
+			<div id="single_item_container">
+				<div id="single_item_image"></div>
+				<div id="single_item_detail">
+					<div id="single_item_name"></div>
+					<div id="single_item_desc"></div>
+					<div id="single_item_descLong"></div>
+					<div id="single_item_price"></div>
+					<div id="single_item_button"></div>
+				</div>
+			</div>
+			<div id="list_categories_container"></div>
 			<div id="new_item_container">
 				<div class="block"><label>Title:</label><input type="text" id="new_item_title"/></div>
 				<div class="separator"></div>
@@ -53,12 +63,14 @@
 				<button class="create" onclick="createCategory(event)">Create</button>
 			</div>
 			<div id="login_container">
+				<div class="separator"></div>
 				<div class="block"><label>username:</label><input type="text" id="username"/></div>
 				<div class="separator"></div>
 				<div class="block"><label>password:</label><input type="password" id="password"/></div>
 				<button class="create" onclick="login(event)">Login</button>
 			</div>	
 			<div id="signUp_container">
+				<div class="separator"></div>
 				<div class="block"><label>first name:</label><input type="text" id="fname"/></div>
 				<div class="block"><label>last name:</label><input type="text" id="lname"/></div>
 				<div class="block"><label>email:</label><input type="text" id="email"/></div>
@@ -72,7 +84,8 @@
 				<div class="block"><label>username:</label><input type="text" id="usernameSign"/></div>
 				<div class="block"><label>password:</label><input type="password" id="passwordSign"/></div>
 				<button class="create" onclick="signUp(event)">Login</button>
-			</div>			
+			</div>
+			<div id="cart_container"></div>			
 		</div>
 		<div id="footer"></div>
 	</div>

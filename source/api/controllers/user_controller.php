@@ -24,15 +24,15 @@ class UserController
 
 
         /**
-User is an Object with the form of:
+        User is an Object with the form of:
 
-  public 'id' => string '1' (length=1)
-  public 'username' => string 'majid' (length=5)
-  public 'password' => string '$2y$10$7jDxuXHVsglkQUbCPdqoaO.hYXNd0vUDfUsBTJ8FR2mrLbxAY1AcC' (length=60)
-  public 'isAdmin' => string '1' (length=1)
-  public 'email' => string 'majidfn@gmail.com' (length=17)
-  public 'createdDateTime' => string '2017-10-26 23:44:20' (length=19)
-  public 'lastLoginDateTime' => null
+        public 'id' => string '1' (length=1)
+        public 'username' => string 'majid' (length=5)
+        public 'password' => string '$2y$10$7jDxuXHVsglkQUbCPdqoaO.hYXNd0vUDfUsBTJ8FR2mrLbxAY1AcC' (length=60)
+        public 'isAdmin' => string '1' (length=1)
+        public 'email' => string 'majidfn@gmail.com' (length=17)
+        public 'createdDateTime' => string '2017-10-26 23:44:20' (length=19)
+        public 'lastLoginDateTime' => null
         */
     public function login($payload)
     {
@@ -41,7 +41,7 @@ User is an Object with the form of:
         } elseif (!array_key_exists('password', $payload)) {
             throw new Exception('`password` should be provided!');
         }
-
+        
         $user = $this->model->getUserByUsername($payload->username);
         
         if (!password_verify($payload->password, $user->password))
@@ -72,7 +72,22 @@ User is an Object with the form of:
             throw new Exception("Invalid / Expired Token", 401);
         }
     }
+    public function getUserByToken($headers){
+        $this->verify($headers);
+        $token = explode(' ', $headers['Authorization'])[1];
+        
+        return $this->model->getUserByToken($token);
 
+    }
+    
+    public function getFirstName($headers)
+    {
+        $this->verify($headers);
+        
+        $token = explode(' ', $headers['Authorization'])[1];
+        
+        $user = $this->model->getUserByToken($token);
+    }
 
     public function isAdmin($headers) {
         $this->verify($headers);

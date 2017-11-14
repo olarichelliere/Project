@@ -62,9 +62,6 @@ try {
     switch ($resource) {
         case 'items':
 
-        // $userController->verify($requestHeaders);
-
-
         $model = new ItemModel($mysqli);
         $controller = new ItemController($model);
         
@@ -94,7 +91,6 @@ try {
             // TODO: Remove this after implementing it
             throw new Exception('Handler for DELETE method has NOT been implemented yet!', 501); // 501: Not Implemented!
         }
-        
         break;
         
         case 'categories':
@@ -117,13 +113,14 @@ try {
             // TODO: Remove this after implementing it
             throw new Exception('Handler for DELETE method has NOT been implemented yet!', 501); // 501: Not Implemented!
         }
-
         break;
 
 
         case 'users':
         if ($method == 'POST') {
             $data = $userController->create($requestJSON);   
+        }elseif($method == 'GET'){
+            $data = $userController->getUserByToken($requestHeaders);
         }
         break;
 
@@ -134,6 +131,31 @@ try {
         }
         break;        
 
+        case 'cart':
+        $model = new CartModel($mysqli);
+        $cartController = new CartController($model);
+        
+        $user = $userController->getUserByToken($requestHeaders)->userId;
+        
+        if ($method == 'POST') {
+            $data=$cartController->add($requestJSON, $user);
+        }elseif($method == 'GET'){
+            $data = $cartController->getUserCart($user);
+        }
+        break;
+
+        case 'order':
+        $model = new OrderModel($mysqli);
+        $orderController = new OrderController($model);
+
+        $user = $userController->getUserByToken($requestHeaders)->userId;
+        
+        if($method == 'POST'){
+            $orderId = $orderController->createOrder($requestJSON, $user);
+            $orderController->createOrderItems($user, $orderId);
+            $orderController->deleteFromCart($user);
+        }
+        break;
         
         default:
         throw new Exception("$method is not implemented on: $baseURL ", 501); // 501: Not Implemented!

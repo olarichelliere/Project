@@ -1,7 +1,29 @@
 /*
 * multi-line comment
 */
+@font-face {
+    font-family: 'minstrelposterwhgregular';
+    src: url('./font/MINSPSW_-webfont.eot');
+    src: url('./font/MINSPSW_-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./font/MINSPSW_-webfont.woff2') format('woff2'),
+         url('./font/MINSPSW_-webfont.woff') format('woff'),
+         url('./font/MINSPSW_-webfont.ttf') format('truetype'),
+         url('./font/MINSPSW_-webfont.svg#minstrelposterwhgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'discoregular';
+    src: url('./font/DISCO___-webfont.eot');
+    src: url('./font/DISCO___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./font/DISCO___-webfont.woff2') format('woff2'),
+         url('./font/DISCO___-webfont.woff') format('woff'),
+         url('./font/DISCO___-webfont.ttf') format('truetype'),
+         url('./font/DISCO___-webfont.svg#discoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
  
+}
 *{
     box-sizing: border-box;
 }
@@ -15,22 +37,40 @@ h1, h2, h3, h4{
 }
 h1{ font-size: 1.7em; }
 h2{ font-size: 1.5em; }
+
+h1 a{
+	font-family: 'minstrelposterwhgregular';
+	font-size: 48px;
+	margin-bottom: -2px;
+	border-bottom: solid black 2px;
+}
+h5{
+	font-family: 'discoregular';
+	font-size: 18px;
+	margin-top: -3px;
+}
 a{
 	color: black;
 	text-decoration: none;
 }
-	a:hover,
-	a:active{ text-decoration: underline; }
-
-/* you can structure your code's white space so that it is as readable for when you come back in the future or for other people to read and edit quickly */
+	a:hover,a:active{ 
+		text-decoration: none;
+	 }
 
 body{
-    font-family: arial; font-size: 80%; line-height: 1.2em; width: 100%; margin: 0; background: #eee;
+	font-family: arial; 
+	font-size: 80%; 
+	line-height: 1.2em; 
+	width: 100%;
+	margin: 0; 
+	background: white;
 }
-/* you can put your code all in one line like above */
-#page{ margin: 20px; }
 
-/* or on different lines like below */
+#page{ 
+	margin: 20px;
+}
+
+
 #logo{
 	width: 35%;
 	margin-top: 5px;
@@ -38,7 +78,7 @@ body{
 	display: inline-block;
 	float: left;
 }
-/* but try and be as concise as possible */
+
 #nav{
 	width: 60%;
 	display: inline-block;
@@ -47,78 +87,85 @@ body{
 }
 	#nav ul{}
 		#nav ul li{
+			font-family: 'discoregular';
 			display: inline-block;
 			height: 62px;
 		}
 			#nav ul li a{
-				padding: 20px;
-				background: orange;
-				color: white;
+				padding: 10px;
+				background: white;
+				color: black;
 			}
 			#nav ul li a:hover{
-				background-color: #ffb424;
-				box-shadow: 0px 1px 1px #666;
+				background-color: grey;
+				
 			}
-			#nav ul li a:active{ background-color: #ff8f00; }
-			/*
-#container{
+			#nav ul li a:active{ background-color: white; }
+
+#list_container{
 	position: absolute;
-	top: 100px;
-	left: 0;
+	top: 150px;
+left: 0;
 }
 
-*/
 #list_categories_Name_container{
-	position: fixed;
-	top: 50px;left:0;bottom: 0;
-	width: 150px;
-	height: 100%;
+	left: 0;
+	float: left;
 	padding: 5px;	
 }
+#list_categories_container{
+	float: left;
 
-
-
-.category{
-	color: black;
-	border: solid black 1pt;	
-	margin-bottom: 5px;
 }
+.category{
+	color: white;
+	background: green;	
+	margin-bottom: 5px;
+	padding: 5px;
+	width: 170px;
 
+}
+.category .name{
+	font-size: 16px;
+
+}
+.category .description{
+	font-size: 12px;
+}
 #content{
 	
 	margin: 0 30px 30px;
 /*	background: white;
 	padding: 20px;
 	width:94%;*/
-    min-height: 20px;
+	/*min-height: 20px;
+	border: solid red 2px;*/
 }
 
-#content::after {
-    content: "";
-    clear: both;
     
-}
 
 #content a{
-	color: white;
+	color: black;
 }
 
 .center {
     margin: auto;
-	width: 50%;
+	width: 100%;
 }
 
-.item_box {
+.item_box, .category_box{
 	margin: 30px 10px;
-	background: grey;
-	color:white;
+	background: white;
+	color:black;
 	width:250px;
 	padding: 10px;
 	float:left;
 }
 
-.item_box img { 
-	height: 120px;
+.item_box img, .category_box img { 
+	display: block;
+	margin: auto;
+	width: 150px;
 }
 
 #list_items_container{
@@ -151,48 +198,81 @@ body{
 	text-align: center;
 }
 
-#single_item_container #single_item_name{
+
+#single_item_container{
 	float: left;
-	left: 150px;
-	font-weight: bold;
-	font-size: 52px;
-	padding: 20px;
-	margin: 20px;
+	/*width: 100%;*/
+}
+#single_item_image img{
+	margin: 20px 40px 20px;
+	float: left;
+	left: 0;
+	width: 200px;
 }
 
-#single_item_container #single_item_desc{
-	font-weight: normal;
+#single_item_image{
+	float: none;
+	clear: both;
+	overflow: auto;
+}
+
+#single_item_container #single_item_button{
+	float: left;
+	
+}
+
+#single_item_container #single_item_name{
+
+	font-weight: bold;
 	font-size: 24px;
-	margin: 20px;
-	padding: 20px;
+	padding: 10px;
+	margin: 10px;
+}
+
+#single_item_descLong{
+	
+	font-weight: normal;
+	font-size: 18px;
+	margin: 10px;
+	padding: 10px;
+	width: 100%;
+}
+
+#single_item_container  #single_item_desc{
+
+	font-weight: normal;
+	font-size: 18px;
+	margin: 10px;
+	padding: 10px;
 }
 
 #single_item_container #single_item_price{
-	font-weight: normal;
-	font-size: 34px;
-	margin: 20px;
-	padding: 20px;
+	
+	font-weight: bold;
+	font-size: 24px;
+	margin: 10px;
+	padding: 10px;
 	color: green;
 }
 
 .block{
-	float:left;
-	margin:0 5px 20px;
+	/*float:left;*/
+	margin:0 5px 10px;
 }
+
 
 .block label{
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 18px;
 	vertical-align: middle;
-	width: 100px;
+	width: 200px;
 }
 
 .block input, .block textarea{
 	border: 1px solid grey;
-	font-size: 24px;
-	border-radius:5px;
-	padding: 10px;
-	margin: 10px;
+	font-size: 16px;
+	padding: 5px;
+	margin: 5px;
 	vertical-align: middle;
 }
 
@@ -204,14 +284,25 @@ body{
 	clear: both;
 }
 
+.thumbnail img{
+	height: 100px;
+	float: left;
+	
+}
+.cart_box{
+	border-bottom: solid black 2px;
+	overflow: auto;
+}
+
 button.create{
-	margin: 20px;
-	padding: 20px;
-	font-size: 24px;
-	font-weight: bold;
-	background: rgb(144, 255, 144);
-	border: 2px solid green;
-	border-radius:15px;
+	
+	font-family: 'discoregular';
+	margin: 5px;
+	padding: 10px 40px;
+	font-size: 18px;
+	color: white;
+	background: rgb(50, 49, 49);
+
 }
 
 #footer{
@@ -226,5 +317,5 @@ button.create{
 	}
 
 /* multiple styles seperated by a , */
-#content,
+
 ul li a{ box-shadow: 0px 1px 1px #999; }
