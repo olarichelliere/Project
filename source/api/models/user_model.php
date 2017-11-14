@@ -48,7 +48,20 @@ class UserModel extends BaseModel
         return $result->fetch_object($this->ModelName);
     }
 
+    public function logout($userId){
+        $query = "DELETE FROM tokens WHERE userId = $userId" . 
+ 
+        error_log($query);
 
+        $result = $this->db_connection->query($query);
+
+        if (!$result) {
+        throw new Exception("Database error: {$this->db_connection->error}", 500);
+    } 
+
+
+
+    }
 
     public function storeToken($userId, $token){
     	$now = date("Y-m-d H:i:s");

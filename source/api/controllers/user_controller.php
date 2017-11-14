@@ -17,9 +17,18 @@ class UserController
             throw new Exception('`password` should be provided!');
         }
 
-       $payload->password = password_hash($payload->password, PASSWORD_BCRYPT);
+        $payload->password = password_hash($payload->password, PASSWORD_BCRYPT);
 
-        return $this->model->create($payload);
+        //create the user
+        $this->model->create($payload);
+        
+        //login the new user
+        $user = $this->model->getUserByUsername($payload->username);
+        $token = bin2hex(random_bytes(64));
+        
+        $this->model->storeToken($user->id, $token);
+        
+        return array('token' => $token, 'isAdmin' => $user->isAdmin);
     }
 
 
@@ -34,6 +43,8 @@ class UserController
         public 'createdDateTime' => string '2017-10-26 23:44:20' (length=19)
         public 'lastLoginDateTime' => null
         */
+
+
     public function login($payload)
     {
         if (!array_key_exists('username', $payload)) {
@@ -54,6 +65,12 @@ class UserController
         $this->model->storeToken($user->id, $token);
 
         return array('token' => $token, 'isAdmin' => $user->isAdmin);
+    }
+
+    public function logout($payload)
+    {
+        $this->model->logout($payload);
+
     }
 
     public function verify($headers){

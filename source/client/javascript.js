@@ -315,15 +315,16 @@ function showCart(event){
             htmlContainer.innerHTML += 
                 `<div class="cart_box">
                     <div class="thumbnail"><img src="${baseURL}/../images/${item['image']}"/></div>   
-                    <div class="title">Quantity: ${item["quantity"]}</div>
-                    <div class="name">${item["name"]}</div>
-                    <div class="price">$${item["price"]}</div>
+                    <div class="title">Quantity: ${item['quantity']}</div>
+                    <div class="name">${item['name']}</div>
+                    <div class="price">$${item['price']}</div>
 
             </div>`;
         }    
         htmlContainer.innerHTML += `<div id="totalAmount" class="total">Total: ${data['total']}</div>`;
-        htmlContainer.innerHTML += `<button class="create" onclick="proceedToPayment(event,${data['total']})">Proceed To Payment</button>`;
+        htmlContainer.innerHTML += `<button class="create" onclick="proceedToPayment(event,'${data['total']}')">Proceed To Payment</button>`;
     });
+
 }
 
 function proceedToPayment(event, total){
@@ -331,7 +332,6 @@ function proceedToPayment(event, total){
     event.preventDefault();
 
     // if payment is succeful create order and delete cart
-
 
     var data = {
         totalPrice: total
@@ -377,9 +377,11 @@ function login(event) {
         
         getFirstNameByID(response.id);
     });
+
     if(isAdmin==1){
         adminLayout();
     };
+
     document.getElementById("items_btn").click();
 }
 
@@ -390,9 +392,23 @@ function getFirstNameByID(){
 
     httpRequest('GET', '/users/', undefined, function (data) {
 
-            htmlContainer.innerHTML = `Hi ${data.firstName}`;
+            htmlContainer.innerHTML = `Hi ${data.firstName} <a href="./login" id="logout_btn">(log out)</a>`;
+            document.getElementById("logout_btn").addEventListener('click', logUserOut, false);
+
             console.log('Successful creation of users First name');      
     });
+}
+
+function logUserOut(){
+
+    httpRequest('DELETE', '/login/', undefined, function () {
+
+        setCookie('token', 0, 1);
+        setCookie('isAdmin', 0, 1);
+        
+        document.getElementById('logInUser').value='';
+    });
+
 }
 
 function adminLayout(){
@@ -449,10 +465,7 @@ function signUp(event) {
         postalCode: postalCode,
         isAdmin: 0  
     }
-    console.log(data);
-
-
-
+   
     httpRequest('POST', '/users/', data, function (response) {
         console.log('Successful created user: ', response);
 
@@ -461,6 +474,8 @@ function signUp(event) {
 
         setCookie('token', userToken, 1);
         setCookie('isAdmin', isAdmin, 1);
+
+        getFirstNameByID(response.id);
     });
 
     document.getElementById("items_btn").click();
@@ -481,12 +496,14 @@ function hideAllSections() {
 
 function loaded() {
     /// Button Listeners
+    document.getElementById("logoLink").addEventListener('click', showItems, false);
     document.getElementById("items_btn").addEventListener('click', showItems, false);
     document.getElementById("categories_btn").addEventListener('click', showCategories, false);
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
     document.getElementById("cart_btn").addEventListener('click', showCart, false);
-    proceedToPayment
+    
+    //proceedToPayment
 
     //document.getElementById("login_btn").click();
     document.getElementById("categories_btn").click();

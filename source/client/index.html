@@ -10,20 +10,19 @@
 <body onload="loaded()">
 	<div id="page">
 		<div id="logo">
-			<h1><a href="./" id="logoLink">atuleur</a></h1>
+			<h1><a href="./items" id="logoLink">atuleur</a></h1>
 			<h5>luxury watches</h5>
 		</div>
 		<div id="nav">
+			<div id="logInUser"></div>	
 			<ul id="ulNav">
-				<li><a href="./">Home</a></li>
+				<!-- <li><a href="./">Home</a></li> -->
 				<li><a href="./items" id="items_btn">Items</a></li>
 				<li><a href="./categories" id="categories_btn">Categories</a></li>
 				<li><a href="./login" id="login_btn">Login</a></li>
-				<li><a href="./login" id="signUp_btn">Sign Up</a></li>
+				<!-- <li><a href="./login" id="signUp_btn">Sign Up</a></li> -->
 				<li><a href="./cart" id="cart_btn">Cart</a></li>
-				
 			</ul>
-			<div id="logInUser"></div>	
 		</div>
 		
 		<div id="content">
@@ -68,6 +67,7 @@
 				<div class="separator"></div>
 				<div class="block"><label>password:</label><input type="password" id="password"/></div>
 				<button class="create" onclick="login(event)">Login</button>
+				<a href="./login" id="signUp_btn">No Account yet, Create one here</a>
 			</div>	
 			<div id="signUp_container">
 				<div class="separator"></div>
