@@ -386,6 +386,7 @@ function login(event) {
 }
 
 function getFirstNameByID(){
+    event.preventDefault();
     var htmlContainer = document.getElementById('logInUser');
 
     htmlContainer.innerHTML = '';
@@ -393,22 +394,24 @@ function getFirstNameByID(){
     httpRequest('GET', '/users/', undefined, function (data) {
 
             htmlContainer.innerHTML = `Hi ${data.firstName} <a href="./login" id="logout_btn">(log out)</a>`;
-            document.getElementById("logout_btn").addEventListener('click', logUserOut, false);
-
+           
+            document.addEventListener('click',function(e){
+                if(e.target && e.target.id== 'logout_btn'){
+                    logUserOut();
+                }
+             })
             console.log('Successful creation of users First name');      
     });
 }
 
 function logUserOut(){
-
-    httpRequest('DELETE', '/login/', undefined, function () {
-
-        setCookie('token', 0, 1);
-        setCookie('isAdmin', 0, 1);
-        
-        document.getElementById('logInUser').value='';
+    event.preventDefault();
+    httpRequest('DELETE', '/login/', undefined, function (data) {
+        console.log('Successful deleted token');
+        //setCookie('token', 0, 1);
+        //setCookie('isAdmin', 0, 1);
     });
-
+    document.getElementById('logInUser').innerHTML='';
 }
 
 function adminLayout(){
@@ -501,8 +504,10 @@ function loaded() {
     document.getElementById("categories_btn").addEventListener('click', showCategories, false);
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
-    document.getElementById("cart_btn").addEventListener('click', showCart, false);
+    document.getElementById("logOut_btn").addEventListener('click', logUserOut, false);
     
+    document.getElementById("cart_btn").addEventListener('click', showCart, false);
+    //logOut_btn
     //proceedToPayment
 
     //document.getElementById("login_btn").click();

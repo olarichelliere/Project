@@ -67,15 +67,16 @@ class UserController
         return array('token' => $token, 'isAdmin' => $user->isAdmin);
     }
 
-    public function logout($payload)
+    public function logout($userId)
     {
-        $this->model->logout($payload);
-
+        $this->model->logout($userId);
     }
 
     public function verify($headers){
 
         if (!array_key_exists('Authorization', $headers)) {
+            //user not log in, how do we send to login form?
+            
             throw new Exception('`Authorization` should be provided!');
         }
 
@@ -89,6 +90,7 @@ class UserController
             throw new Exception("Invalid / Expired Token", 401);
         }
     }
+
     public function getUserByToken($headers){
         $this->verify($headers);
         $token = explode(' ', $headers['Authorization'])[1];

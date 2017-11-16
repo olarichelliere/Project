@@ -127,12 +127,11 @@ try {
 
         case 'login':
 
-        $user = $userController->getUserByToken($requestHeaders)->userId;
-
         if ($method == 'POST') {
             $data = $userController->login($requestJSON);   
         }elseif ($method == 'DELETE') {
-            $data = $userController->logout($user);   
+            $user = $userController->getUserByToken($requestHeaders)->userId;
+            $userController->logout($user);   
         }
         break;
 
