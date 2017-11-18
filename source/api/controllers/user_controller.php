@@ -67,9 +67,10 @@ class UserController
         return array('token' => $token, 'isAdmin' => $user->isAdmin);
     }
 
-    public function logout($userId)
+    public function logout($headers)
     {
-        $this->model->logout($userId);
+        $token = explode(' ', $headers['Authorization'])[1];
+        $this->model->logout($token);
     }
 
     public function verify($headers){
