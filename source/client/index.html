@@ -16,15 +16,17 @@
 		<div id="nav">
 			<div id="logInUser"></div>	
 			<ul id="ulNav">
-				<!-- <li><a href="./">Home</a></li> -->
 				<li><a href="./items" id="items_btn">Items</a></li>
 				<li><a href="./categories" id="categories_btn">Categories</a></li>
 				<li><a href="./login" id="login_btn">Login</a></li>
-				<li><a href="./login" id="logOut_btn">Log Out</a></li>
+				<li><a href="./login" id="logOut_btn">LogOut</a></li>
 				<li><a href="./cart" id="cart_btn">Cart</a></li>
 			</ul>
+			<div id="search_box">
+				<input type="search" placeholder="Search the site..." id="searchItem"/>
+				<button class="create" onclick="search(event)">Search</button>
+			</div>
 		</div>
-		
 		<div id="content">
 			<div id="list_container">
 				<div id="list_categories_Name_container"></div>
@@ -50,7 +52,7 @@
 				<div class="separator"></div>
 				<div class="block"><label>Image:</label><input name="new_item_image" type="file" id="new_item_image"></div>
 				<div class="separator"></div>
-				<button class="create" onclick="createItem(event)">Create</button>
+				<button class="create1" onclick="createItem(event)">Create</button>
 			</div>
 			<div id="new_category_container">
 				<div class="block"><label>Category Title:</label><input type="text" id="new_category_title"/></div>

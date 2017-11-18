@@ -75,12 +75,12 @@ margin: 20px;
 width: 35%;
 margin-top: 5px;
 font-family: georgia;
-display: inline-block;
 float: left;
 }
 
 #nav{
 width: 60%;
+text-align: center;
 display: inline-block;
 text-align: right;
 float: left;
@@ -89,7 +89,7 @@ float: left;
   #nav ul li{
     font-family: 'discoregular';
     display: inline-block;
-    height: 62px;
+    height: 10px;
   }
     #nav ul li a{
       padding: 10px;
@@ -98,9 +98,36 @@ float: left;
     }
     #nav ul li a:hover{
       background-color: grey;
-      
     }
     #nav ul li a:active{ background-color: white; }
+    
+ul li a { box-shadow: 0px 1px 1px #999; }
+
+#search_box button{
+  padding: 10px;
+  size: 10pt;
+  background: white;
+  color: black;
+  height: 30px;
+}
+#logInUser{
+size: 16pt;
+  
+}
+/*input[type=text] {*/
+input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  /* background-image: url('../images/searchicon.png'); */
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 6px 10px 6px 20px;
+
+}
 
 #list_container{
 position: absolute;
@@ -176,6 +203,7 @@ left: 250px;
 
 #list_items_container .title{
 font-weight: bold;
+font-size: 24px;
 margin-bottom: 10px;
 padding: 10px;
 border-bottom: black 1px solid;
@@ -184,10 +212,11 @@ text-align: center;
 
 #list_items_container .description{
 font-weight: normal;
-margin-bottom: 10px;
+margin-bottom: 5px;
 padding: 10px;
 border-bottom: black 1px solid;
 text-align: center;
+height: 40px;
 }
 
 #list_items_container .price{
@@ -211,22 +240,22 @@ width: 200px;
 }
 
 #single_item_image{
-float: none;
-clear: both;
-overflow: auto;
+  float: left;
+/* float: none;
+clear: both; 
+overflow: auto;*/
 }
 
 #single_item_container #single_item_button{
-float: left;
-
+  float: left;
 }
 
 #single_item_container #single_item_name{
 
-font-weight: bold;
-font-size: 24px;
-padding: 10px;
-margin: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 10px;
+  margin: 10px;
 }
 
 #single_item_descLong{
@@ -258,21 +287,24 @@ color: green;
 .block{
 /*float:left;*/
 margin:0 5px 10px;
+
 }
 
 
 .block label{
+position: absolute;
 font-weight: bold;
 font-size: 18px;
 vertical-align: middle;
 width: 200px;
+margin: 5px 5px 0 0px;
 }
 
 .block input, .block textarea{
 border: 1px solid grey;
 font-size: 16px;
 padding: 5px;
-margin: 5px;
+margin: 5px 5px 0 150px;
 vertical-align: middle;
 }
 
@@ -304,7 +336,7 @@ color: white;
 background: rgb(50, 49, 49);
 
 }
-
+/*
 #footer{
 border-bottom: 1px #ccc solid;
 margin-bottom: 10px;
@@ -315,7 +347,6 @@ margin-bottom: 10px;
   font-size: 80%;
   color: grey;
 }
-
+*/
 /* multiple styles seperated by a , */
 
-ul li a{ box-shadow: 0px 1px 1px #999; }

@@ -12,7 +12,7 @@ CREATE TABLE `items` (
   `price` float DEFAULT NULL,
   `image` varchar(255) NOT NULL DEFAULT '',
   `datetimeAdded` datetime DEFAULT CURRENT_TIMESTAMP,
-  FULLTEXT(name, descriptionShort),
+  FULLTEXT(name, descriptionShort,descriptionLong,colour),
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

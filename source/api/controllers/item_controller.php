@@ -76,13 +76,23 @@ class ItemController
      */
     public function getAllWithFilters($filters) {
 
-        $categoryId = $filters['categoryid'];
-        $categoryId = intval($categoryId);
+        if (array_key_exists('categoryid', $filters)) {
+           
 
-        if ($categoryId == 0) {
-            throw new Exception('Invalid categoryid. ', 400);
+            $categoryId = $filters['categoryid'];
+            $categoryId = intval($categoryId);
+
+            if ($categoryId == 0) {
+                throw new Exception('Invalid categoryid. ', 400);
+            }
+
+            return $this->model->getFilteredItems($categoryId);
+            
+        }elseif(array_key_exists('searchTXT', $filters)){
+
+            $searchTXT = $filters['searchTXT'];
+
+            return $this->model->getFilteredByTXT($searchTXT);
         }
-
-        return $this->model->getFilteredItems($categoryId);
     }
 }

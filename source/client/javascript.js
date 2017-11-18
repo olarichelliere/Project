@@ -85,13 +85,6 @@ function populateCategoriesList(event){
     var htmlContainer = document.getElementById('list_categories_Name_container');
     htmlContainer.innerHTML = '';
 
-
-    htmlContainer.innerHTML +=
-        `<div class="searchItem">
-        <input type="text" id="searchItem"/></div>
-        </div>`;
-
-
     httpRequest('GET', '/categories', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var category = data[i];
@@ -106,10 +99,31 @@ function populateCategoriesList(event){
     });
 }
 
+function search(event){
+    var htmlContainer = document.getElementById('list_items_container');
+    var searchTXT=document.getElementById('searchItem').value;
+    document.getElementById('searchItem').value='';
+    htmlContainer.innerHTML = '';
+
+    httpRequest('GET', '/items?searchTXT='+searchTXT, undefined, function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            htmlContainer.innerHTML +=
+                `<div class="item_box">
+                    <a href="#" onclick="showItem(event, ${item['id']})">
+                        <div class="center"><img src="${baseURL}/../images/${item['image']}"/></div>
+                        <div class="title">${item["name"]}</div>
+                        <div class="description">${item["descriptionShort"]}</div>
+                        <div class="price">$${item["price"]}</div>
+                    </a>
+                </div>`;
+        }
+    });
+}
+
 function populateItemsList(event){
     var htmlContainer = document.getElementById('list_items_container');
     htmlContainer.innerHTML = '';
-
 
     httpRequest('GET', '/items', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -136,7 +150,6 @@ function showCategories(event) {
     htmlContainer.innerHTML = '';
     htmlContainer.style.display = "inline";
     
-
     httpRequest('GET', '/categories', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var category = data[i];
@@ -152,6 +165,7 @@ function showCategories(event) {
     });
 
 }
+
 function filterByCategory(event,id){
     event.preventDefault();
     
@@ -266,7 +280,6 @@ function createCategory(event){
     
     var title = document.getElementById("new_category_title").value;
     var desc = document.getElementById("new_category_desc").value;
-
     var file = document.getElementById("new_category_image").files[0];
 
     var data = {
