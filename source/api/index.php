@@ -130,8 +130,8 @@ try {
         if ($method == 'POST') {
             $data = $userController->login($requestJSON);   
         }elseif ($method == 'DELETE') {
-            $user = $userController->getUserByToken($requestHeaders)->userId;
-            $userController->logout($user);   
+            $userId = $userController->getUserByToken($requestHeaders)->userId;
+            $userController->logout($userId);   
         }
         break;
 

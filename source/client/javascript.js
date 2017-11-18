@@ -384,17 +384,18 @@ function login(event) {
 
         userToken = response.token;
         isAdmin = response.isAdmin;
-
+        
         setCookie('token', userToken, 1);
         setCookie('isAdmin', isAdmin, 1);
         
         getFirstNameByID(response.id);
+    
+
+        if(isAdmin==1){
+            console.log('Admin Layout');
+            adminLayout();
+        };
     });
-
-    if(isAdmin==1){
-        adminLayout();
-    };
-
     document.getElementById("items_btn").click();
 }
 
@@ -406,7 +407,7 @@ function getFirstNameByID(){
 
     httpRequest('GET', '/users/', undefined, function (data) {
 
-            htmlContainer.innerHTML = `Hi ${data.firstName} <a href="./login" id="logout_btn">(log out)</a>`;
+            htmlContainer.innerHTML = `Hi ${data.firstName} <a id="logout_btn">(log out)</a>`;
            
             document.addEventListener('click',function(e){
                 if(e.target && e.target.id== 'logout_btn'){
@@ -419,10 +420,16 @@ function getFirstNameByID(){
 
 function logUserOut(){
     event.preventDefault();
-    httpRequest('DELETE', '/login/', undefined, function (data) {
+    httpRequest('DELETE', '/login/', undefined, function () {
         console.log('Successful deleted token');
-        //setCookie('token', 0, 1);
-        //setCookie('isAdmin', 0, 1);
+        setCookie('token', 0, 1);
+        setCookie('isAdmin', 0, 1);
+
+
+        var elem = document.getElementById('new_category_li');
+        elem.parentNode.removeChild(elem);
+        var elem = document.getElementById('new_item_li');
+        elem.parentNode.removeChild(elem);
     });
     document.getElementById('logInUser').innerHTML='';
 }
@@ -430,15 +437,39 @@ function logUserOut(){
 function adminLayout(){
         
         var htmlContainer = document.getElementById('ulNav');
-        htmlContainer.innerHTML +=
 
-        '<li><a href="./categories" id="new_category_btn">New Categories</a></li>';
+        var newA= document.createElement("a");
+       // newA.setAttribute('href',"#");
+        newA.setAttribute('id',"new_category_btn");
+        newA.innerHTML = "New Categories";
+
+        var newLI = document.createElement("li");
+        newLI.setAttribute('id',"new_category_li");
+        newLI.appendChild(newA);
+        htmlContainer.appendChild(newLI);
+
+        document.addEventListener('click',function(event){
+            if(event.target && event.target.id== 'new_category_btn'){
+                showNewCategory(event);
+            }
+        });
+
         
-        htmlContainer.innerHTML +=
-        '<li><a href="./items" id="new_item_btn">New Item</a></li>';
-    
-        document.getElementById("new_item_btn").addEventListener('click', showNewItem, false);
-        document.getElementById("new_category_btn").addEventListener('click', showNewCategory, false);
+        var newAitems= document.createElement("a");
+        //newAitems.setAttribute('href',"#");
+        newAitems.setAttribute('id',"new_item_btn");
+        newAitems.innerHTML = "New Item";
+
+        var newLIitem = document.createElement("li");
+        newLIitem.setAttribute('id',"new_item_li");
+        newLIitem.appendChild(newAitems);
+        htmlContainer.appendChild(newLIitem);
+
+        document.addEventListener('click',function(event){
+            if(event.target && event.target.id== 'new_item_btn'){
+                showNewItem(event);
+            }
+        });
 }
 
 
@@ -517,7 +548,7 @@ function loaded() {
     document.getElementById("categories_btn").addEventListener('click', showCategories, false);
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
-    document.getElementById("logOut_btn").addEventListener('click', logUserOut, false);
+    //document.getElementById("logOut_btn").addEventListener('click', logUserOut, false);
     
     document.getElementById("cart_btn").addEventListener('click', showCart, false);
     //logOut_btn
