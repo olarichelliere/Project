@@ -40,6 +40,7 @@ function hideAllSections() {
     document.getElementById("list_categories_container").style.display = "none";
     document.getElementById("single_item_container").style.display = "none";
     document.getElementById("new_item_container").style.display = "none";
+    document.getElementById("update_item_container").style.display = "none";
     document.getElementById("new_category_container").style.display = "none";
     document.getElementById("login_container").style.display = "none";
     document.getElementById("signUp_container").style.display = "none";

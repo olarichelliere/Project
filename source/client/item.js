@@ -51,13 +51,21 @@ function showItem(event, id) {
     htmlContainer.style.display = "inline-block";
     
     httpRequest('GET', '/items/' + id, undefined, function (data) {
+        console.log(data);
         document.getElementById('single_item_image').innerHTML =  `<img src="${baseURL}/../images/${data.image}"/>`;
         document.getElementById('single_item_name').innerHTML = data.name;
         document.getElementById('single_item_desc').innerHTML = data.descriptionShort;
+        document.getElementById('single_item_colour').innerHTML = data.colour;
         document.getElementById('single_item_descLong').innerHTML = data.descriptionLong;
         document.getElementById('single_item_price').innerHTML = '$' + data.price;
 
         document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event, ${data.id})">Add to my cart</button>`;
+       console.log(isAdmin);
+        if(getCookie('isAdmin')==1){ 
+            document.getElementById('single_itemUpdate_button').innerHTML = `<button class="create" onclick="showUpdateItem(event, ${data.id})">Update</button>`;
+       }else{
+        document.getElementById('single_itemUpdate_button').innerHTML='';
+       }
     });
 }
 
@@ -71,23 +79,87 @@ function showNewItem(event) {
     htmlContainer.style.display = "block";
 
     document.getElementById("new_item_title").value = '';
-    document.getElementById("new_item_desc").value = '';
+    document.getElementById("new_item_descShort").value = '';
+    document.getElementById("new_item_descLong").value = '';
+    document.getElementById("new_item_colour").value = '';
     document.getElementById("new_item_price").value = '';
     document.getElementById("new_item_image").value = '';
+}
+
+function showUpdateItem(event,id) {
+    event.preventDefault();
+    
+    hideAllSections();
+
+    document.getElementById("update_item_title").value = '';
+    document.getElementById("update_item_descShort").value = '';
+    document.getElementById("update_item_descLong").value = '';
+    document.getElementById("update_item_colour").value = '';
+    document.getElementById("update_item_price").value = '';
+    document.getElementById("update_item_imageView").value = '';
+
+    var htmlContainer = document.getElementById('update_item_container');
+    htmlContainer.style.display = "block";
+
+    httpRequest('GET', '/items/' + id , undefined, function (data) {
+        document.getElementById("update_item_title").value = data.name;
+        document.getElementById("update_item_descShort").value = data.descriptionShort;
+        document.getElementById("update_item_descLong").value = data.descriptionLong;
+        document.getElementById("update_item_colour").value = data.colour;
+        document.getElementById("update_item_price").value = data.price;
+        document.getElementById("update_item_imageView").innerHTML = `<img src="${baseURL}/../images/${data.image}"/>`; 
+        
+        document.getElementById("update_btn").innerHTML=`<button class="create" onclick="UpdateItem(event,${data.id})">Update</button`;
+    });
+}
+
+function UpdateItem(event,id){
+    event.preventDefault();
+    
+    var title = document.getElementById("update_item_title").value;
+    var descShort = document.getElementById("update_item_descShort").value;
+    var descLong = document.getElementById("update_item_descLong").value;
+    var price = document.getElementById("update_item_price").value;
+    var colour = document.getElementById("update_item_colour").value;
+
+    var file = document.getElementById("update_item_image").files[0];
+
+    var data = {
+        id: id,
+        name: title,
+        descriptionShort: descShort,
+        descriptionLong: descLong,
+        colour: colour,
+        price: price
+    }
+    console.log(data);
+    httpRequest('PUT', '/items/'+id, data, function (newRecord) {
+        console.log('Successful updated of item', id);
+        if(!file==null){
+            fileUploadItems(`/items/`+id+`/image`, file, function(){
+                console.log('File uploaded successfully!');
+                document.getElementById("items_btn").click();
+            });
+        }
+    }); 
 }
 
 function createItem(event){
     event.preventDefault();
     
     var title = document.getElementById("new_item_title").value;
-    var desc = document.getElementById("new_item_desc").value;
+    var descShort = document.getElementById("new_item_descShort").value;
+    var descLong = document.getElementById("new_item_descLong").value;
     var price = document.getElementById("new_item_price").value;
+    var colour = document.getElementById("new_item_colour").value;
 
     var file = document.getElementById("new_item_image").files[0];
 
     var data = {
         name: title,
-        descriptionShort: desc,
+        descriptionShort: descShort,
+        descriptionLong: descLong,
+        colour:colour,
         price: price
     }
 

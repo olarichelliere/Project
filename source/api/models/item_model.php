@@ -60,11 +60,15 @@ class ItemModel extends BaseModel
 
     public function update($id, $payload)
     {
+
+
         // Using sprintf to format the query in a nicer way
         $query = sprintf(
-            "UPDATE items SET name = '%s' , descriptionShort = '%s', price = '%s' WHERE id = %d",
+            "UPDATE items SET name = '%s', descriptionShort = '%s', descriptionLong = '%s', colour = '%s', price = '%s' WHERE id = %d",
             $payload->name,
             $payload->descriptionShort,
+            $payload->descriptionLong,
+            $payload->colour,
             $payload->price,
             $id
         );

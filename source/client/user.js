@@ -32,7 +32,6 @@ function login(event) {
         
         getFirstNameByID(response.id);
     
-
         if(isAdmin==1){
             console.log('Admin Layout');
             adminLayout();
@@ -43,23 +42,22 @@ function login(event) {
 
 function getFirstNameByID(){
     event.preventDefault();
+
     var htmlContainer = document.getElementById('logInUser');
 
     httpRequest('GET', '/users/', undefined, function (data) {
-
-            //htmlContainer.innerHTML = `Hi ${data.firstName} <a id="logout_btn">(log out)</a>`;
            
-            var newA = document.createElement("a");
-            newA.setAttribute('id',"logout_btn");
-            newA.innerHTML=`Hi ${data.firstName}(log out)`;
-            htmlContainer.appendChild(newA);
-    
-            newA.addEventListener('click',function(event){
-                if(event.target && event.target.id== 'logout_btn'){
-                    logUserOut();
-                }
-            });
-            console.log('Successful creation of users First name');      
+        var newA = document.createElement("a");
+        newA.setAttribute('id',"logout_btn");
+        newA.innerHTML=`Hi ${data.firstName}(log out)`;
+        htmlContainer.appendChild(newA);
+
+        newA.addEventListener('click',function(event){
+            if(event.target && event.target.id== 'logout_btn'){
+                logUserOut();
+            }
+        });
+    console.log('Successful creation of users First name');      
     });
 }
 
@@ -69,15 +67,17 @@ function logUserOut(){
 
         console.log('Successful deleted token');
     });
-        setCookie('token', 0, 1);
-        setCookie('isAdmin', 0, 1);
+    setCookie('token', "", time()-3600);
+    setCookie('isAdmin', "", time()-3600);
 
-
+    if (document.contains(document.getElementById("new_category_li"))) {
         var elem = document.getElementById('new_category_li');
         elem.parentNode.removeChild(elem);
+    }
+    if (document.contains(document.getElementById("new_item_li"))) {
         var elem = document.getElementById('new_item_li');
         elem.parentNode.removeChild(elem);
-   
+    }
     document.getElementById('logInUser').innerHTML='';
 }
 
@@ -86,7 +86,6 @@ function adminLayout(){
         var htmlContainer = document.getElementById('ulNav');
 
         var newA= document.createElement("a");
-       // newA.setAttribute('href',"#");
         newA.setAttribute('id',"new_category_btn");
         newA.innerHTML = "New Categories";
 
@@ -103,7 +102,6 @@ function adminLayout(){
 
         
         var newAitems= document.createElement("a");
-        //newAitems.setAttribute('href',"#");
         newAitems.setAttribute('id',"new_item_btn");
         newAitems.innerHTML = "New Item";
 

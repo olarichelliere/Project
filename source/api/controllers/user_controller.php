@@ -115,8 +115,10 @@ class UserController
         $token = explode(' ', $headers['Authorization'])[1];
 
         $user = $this->model->getUserByToken($token);
-
-        if ($user->isAdmin != "1") {
+        //error_log("user obj for token: $user");
+        
+        // change (remove the ")
+        if ($user->isAdmin != 1) {
             throw new Exception("Admin Only!", 403);
         }
     }

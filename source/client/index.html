@@ -10,6 +10,8 @@
 	<script src="category.js"></script>
 	<script src="javascript.js"></script>
 
+	
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="./style.css" type="text/css" />
 </head>
 <body onload="loaded()">
@@ -18,19 +20,31 @@
 			<h1><a href="./items" id="logoLink">atuleur</a></h1>
 			<h5>luxury watches</h5>
 		</div>
-		<div id="search_box">
-			<input type="search" placeholder="Search the site..." id="searchItem"/>
-			<button class="create" onclick="search(event)">search</button>
-		</div>
+	
 		<div id="nav">
-			<div id="logInUser"></div>	
 			<ul id="ulNav">
+				<div id="logInUser"></div>	
 				<li><a href="./items" id="items_btn">Items</a></li>
 				<li><a href="./categories" id="categories_btn">Categories</a></li>
-				<li><a  id="login_btn">Login</a></li>
+				<li><a id="login_btn">Login</a></li>
 				<li><a href="./cart" id="cart_btn">Cart</a></li>
 			</ul>
 		</div>
+		<div class="search_box">
+			<div class="box">
+				<div class="container-1">
+					<input type="search" id="searchItem" placeholder="Search..." />
+					<button class="icon" onclick="search(event)"><i class="fa fa-search"></i></button>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 	<div id="search_box">
+				<input type="search" placeholder="Search the site..." id="searchItem"/>
+				<button class="create" onclick="search(event)">search</button>
+			</div> -->
+		
 		<div id="content">
 			<div id="list_container">
 				<div id="list_categories_Name_container"></div>
@@ -42,21 +56,46 @@
 					<div id="single_item_name"></div>
 					<div id="single_item_desc"></div>
 					<div id="single_item_descLong"></div>
+					<div id="single_item_colour"></div>
 					<div id="single_item_price"></div>
 					<div id="single_item_button"></div>
+					<div id="single_itemUpdate_button"></div>
+					
 				</div>
 			</div>
 			<div id="list_categories_container"></div>
 			<div id="new_item_container">
-				<div class="block"><label>Title:</label><input type="text" id="new_item_title"/></div>
 				<div class="separator"></div>
-				<div class="block"><label>Desc:</label><textarea rows="5" cols="50" id="new_item_desc"></textarea></div>
+				<div class="block"><label>Name:</label><input type="text" id="new_item_title"/></div>
+				<div class="separator"></div>
+				<div class="block"><label>Desc Short:</label><input type="text" id="new_item_descShort"/></div>
+				<div class="block"><label>Desc Long:</label><textarea rows="5" cols="50" id="new_item_descLong"></textarea></div>
+
+				<div class="block"><label>Colour:</label><input type="text" id="new_item_colour"/></div>
 				<div class="separator"></div>
 				<div class="block"><label>Price:</label><input type="text" id="new_item_price"/></div>
 				<div class="separator"></div>
 				<div class="block"><label>Image:</label><input name="new_item_image" type="file" id="new_item_image"></div>
 				<div class="separator"></div>
-				<button class="create1" onclick="createItem(event)">Create</button>
+				<button class="create" onclick="createItem(event)">Create</button>
+			</div>
+			<div id="update_item_container">
+					<div class="separator"></div>
+					<div class="block"><label>Name:</label><input type="text" id="update_item_title"/></div>
+					<div class="separator"></div>
+					<div class="block"><label>Desc Short:</label><input type="text" id="update_item_descShort"/></div>
+					<div class="block"><label>Desc Long:</label><textarea rows="5" cols="50" id="update_item_descLong"></textarea></div>
+	
+					<div class="block"><label>Colour:</label><input type="text" id="update_item_colour"/></div>
+					<div class="separator"></div>
+					<div class="block"><label>Price:</label><input type="text" id="update_item_price"/></div>
+					<div class="separator"></div>
+					<div class="block"><label>Image:</label><div id="update_item_imageView"></div></div>
+					<div class="block"><label>Image:</label><input name="update_item_image" type="file" id="update_item_image"></div>
+					
+					<div id="update_btn"></div>
+					<div class="separator"></div>
+					
 			</div>
 			<div id="new_category_container">
 				<div class="block"><label>Category Title:</label><input type="text" id="new_category_title"/></div>

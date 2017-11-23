@@ -19,6 +19,17 @@ class ItemController
         return $this->model->getOne($id);
     }
 
+    public function update($id,$payload){
+
+        if (!array_key_exists('name', $payload)) {
+            throw new Exception('`name` should be provided!', 400);
+        } elseif (!array_key_exists('price', $payload)) {
+            throw new Exception('`price` should be provided!', 400);
+        }
+
+        return $this->model->update($id,$payload);
+    }
+
     public function create($payload)
     {
         // Validating the data inside the JSON
