@@ -123,7 +123,13 @@ try {
             $data = $userController->getUserByToken($requestHeaders);
         }
         break;
-
+            
+        case 'payment':
+        if ($method == 'POST') {
+            $payment=new PaymentController();
+            $payment->collect($requestJSON);
+        }
+        break;
 
         case 'login':
 

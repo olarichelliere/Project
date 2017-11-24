@@ -19,9 +19,9 @@ function showCart(event){
      
     hideAllSections();
 
-    var htmlContainer = document.getElementById('cart_container');
-    htmlContainer.style.display = "inline-table";
+    document.getElementById('cart_container').style.display = "inline-table";
 
+    var htmlContainer = document.getElementById('cart_detail');
     htmlContainer.innerHTML = 'My Cart';
 
     httpRequest('GET', '/cart/', undefined, function (data) {
@@ -36,8 +36,7 @@ function showCart(event){
 
             </div>`;
         }    
-        htmlContainer.innerHTML += `<div id="totalAmount" class="total">Total: ${data['total']}</div>`;
-        htmlContainer.innerHTML += `<button class="create" onclick="proceedToPayment(event,'${data['total']}')">Proceed To Payment</button>`;
+        htmlContainer.innerHTML += `<div id="totalAmount" class="total">Total: ${data['total']}</div>`;   
     });
 
 }

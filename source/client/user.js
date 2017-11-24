@@ -67,8 +67,8 @@ function logUserOut(){
 
         console.log('Successful deleted token');
     });
-    setCookie('token', "", time()-3600);
-    setCookie('isAdmin', "", time()-3600);
+    setCookie('token', 0, -1);
+    setCookie('isAdmin', 0, -1);
 
     if (document.contains(document.getElementById("new_category_li"))) {
         var elem = document.getElementById('new_category_li');
