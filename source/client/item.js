@@ -52,6 +52,7 @@ function showItem(event, id) {
     
     httpRequest('GET', '/items/' + id, undefined, function (data) {
         console.log(data);
+        document.getElementById('single_item_id').innerHTML=data.id;
         document.getElementById('single_item_image').innerHTML =  `<img src="${baseURL}/../images/${data.image}"/>`;
         document.getElementById('single_item_name').innerHTML = data.name;
         document.getElementById('single_item_desc').innerHTML = data.descriptionShort;
@@ -59,7 +60,7 @@ function showItem(event, id) {
         document.getElementById('single_item_descLong').innerHTML = data.descriptionLong;
         document.getElementById('single_item_price').innerHTML = '$' + data.price;
 
-        document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event, ${data.id})">Add to my cart</button>`;
+        document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event)">Add to my cart</button>`;
        console.log(isAdmin);
         if(getCookie('isAdmin')==1){ 
             document.getElementById('single_itemUpdate_button').innerHTML = `<button class="create" onclick="showUpdateItem(event, ${data.id})">Update</button>`;

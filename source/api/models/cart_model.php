@@ -37,14 +37,12 @@ class CartModel extends BaseModel
         
         if (!$result) {
             throw new Exception("Database error: {$this->db_connection->error}", 500);            
-        }
-        
-        ;
+        };
        
 
         $total = $result->fetch_object($this->ModelName)->total;
      
-        return number_format($total,2);
+        return number_format($total,2, '.', '');
     }
 
     public function getItems($userId){

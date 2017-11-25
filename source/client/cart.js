@@ -1,7 +1,7 @@
 
-function addToCart(event, item_id){
+function addToCart(event){
     event.preventDefault();
-    
+    var item_id=document.getElementById("single_item_id")
     //var quantity = document.getElementById("new_item_quantity").value;
     var quantity=1;
 
@@ -33,17 +33,15 @@ function showCart(event){
                     <div class="title">Quantity: ${item['quantity']}</div>
                     <div class="name">${item['name']}</div>
                     <div class="price">$${item['price']}</div>
-
             </div>`;
         }    
-        htmlContainer.innerHTML += `<div id="totalAmount" class="total">Total: ${data['total']}</div>`;   
+        htmlContainer.innerHTML += `<div id="totalAmount" class="total">${data['total']}</div>`;   
     });
-
 }
 
-function proceedToPayment(event, total){
+function createOrder(total){
    
-    event.preventDefault();
+    //event.preventDefault();
 
     // if payment is succeful create order and delete cart
 
