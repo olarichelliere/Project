@@ -7,8 +7,7 @@ $stripe = array(
 
 \Stripe\Stripe::setApiKey($stripe['secret_key']);
 
-class PaymentController
-{
+class PaymentController{
     
     public function collect($payload){
     /* 
@@ -19,19 +18,18 @@ class PaymentController
         }    
       */  
         
-        
-    $token  = $payload->stripeToken;
+      $token  = $payload->stripeToken;
 
-    $customer = \Stripe\Customer::create(array(
-      'email' => $payload->email,
-      'source'  => $token
-    ));
+      $customer = \Stripe\Customer::create(array(
+        'email' => $payload->email,
+        'source'  => $token
+      ));
 
-    $charge = \Stripe\Charge::create(array(
-      'customer' => $customer->id,
-      'amount'   => $payload->amount,
-      'currency' => 'cad'
-    ));    
-            
+      $charge = \Stripe\Charge::create(array(
+        'customer' => $customer->id,
+        'amount'   => $payload->amount,
+        'currency' => 'cad'
+      ));    
+              
     }  
 }
