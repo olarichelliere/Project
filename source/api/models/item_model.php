@@ -18,10 +18,12 @@ class ItemModel extends BaseModel
     {
         // Using sprintf to format the query in a nicer way
         $query = sprintf(
-            "INSERT INTO items (name, price, descriptionShort) VALUES ('%s', '%s', '%s')",
+            "INSERT INTO items (name, price, descriptionShort, descriptionLong, colour) VALUES ('%s', '%s', '%s', '%s', '%s')",
             $payload->name,
             $payload->price,
-            $payload->descriptionShort
+            $payload->descriptionShort,
+            $payload->descriptionLong,
+            $payload->colour
         );
 
         $result = $this->db_connection->query($query);
@@ -87,6 +89,7 @@ class ItemModel extends BaseModel
      */
     public function updateImage($id, $filename) 
     {
+        error_log("update Image: $id : $filename");
         return $this->updateFieldById($id, 'image', $filename);
     }
 

@@ -47,7 +47,6 @@ function hideAllSections() {
     document.getElementById("cart_container").style.display = "none";
 }
 
-
 function loaded() {
     /// Button Listeners
     document.getElementById("logoLink").addEventListener('click', showItems, false);
@@ -55,14 +54,9 @@ function loaded() {
     document.getElementById("categories_btn").addEventListener('click', showCategories, false);
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
-    //document.getElementById("logOut_btn").addEventListener('click', logUserOut, false);
-    
     document.getElementById("cart_btn").addEventListener('click', showCart, false);
-    //logOut_btn
-    //proceedToPayment
 
-    //document.getElementById("login_btn").click();
-    document.getElementById("categories_btn").click();
+    //document.getElementById("categories_btn").click();
     document.getElementById("items_btn").click();
     
 }

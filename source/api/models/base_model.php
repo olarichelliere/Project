@@ -127,9 +127,17 @@ class BaseModel
         return $this->getOne($insertedId);
     }
 
-
-    
-    // TODO: Update the code here to accomodate `delete`
+    public function delete($id)
+    {
+        $query = "DELETE FROM {$this->TableName}  WHERE id = $id";
+        $result = $this->db_connection->query($query);
+        
+        if (!$result) {
+            throw new Exception("Database error: {$this->db_connection->error}", 500);            
+        }
+        
+        return;
+    }
 
     protected function updateFieldById($id, $field, $value)
     {

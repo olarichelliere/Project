@@ -7,17 +7,18 @@ var handler = StripeCheckout.configure({
     locale: 'auto',
     token: function(token) {
         console.log(token);
-       
+        var paymentAmount=document.getElementById("totalAmount").innerHTML;
+        paymentAmount = parseInt(paymentAmount,10)*100;
 
         var data={
             stripeToken: token.id,
             email: token.email,
-            amount: 2800000
+            amount: paymentAmount
         };
         
         httpRequest('POST', '/payment/', data, function (response) {
           console.log('response from server:', response);  
-          createOrder(2800000); 
+          createOrder(paymentAmount); 
         });
     }
   });

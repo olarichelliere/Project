@@ -22,7 +22,7 @@ class CartModel extends BaseModel
             $itemId,
             1
         );
-
+        error_log("QUERY: $query");
         $result = $this->db_connection->query($query);
         
         if (!$result) {
@@ -60,12 +60,7 @@ class CartModel extends BaseModel
         while ($item = $result->fetch_object($this->ModelName)) {
             $items[] = $item;
         }
-        
-       
+              
         return $items;
-
-
     }
-
-
 }

@@ -67,8 +67,11 @@ try {
         
         if ($method == 'POST' && !empty($id) && $subresource == 'image') {
             $data = $controller->upload($id, $_FILES['new_item_image']);
-            
-        } elseif ($method == 'POST') {
+         /*   
+        }if ($method == 'PUT' && !empty($id) && $subresource == 'image') {
+            $data = $controller->upload($id, $_FILES['update_item_image']);
+         */   
+        }  elseif ($method == 'POST') {
             $userController->isAdmin($requestHeaders);
             $data = $controller->create($requestJSON);
             
@@ -87,9 +90,7 @@ try {
             
         } elseif ($method == 'DELETE' && !empty($id)) {
             $userController->isAdmin($requestHeaders);
-            // $controller->delete($id);
-            // TODO: Remove this after implementing it
-            throw new Exception('Handler for DELETE method has NOT been implemented yet!', 501); // 501: Not Implemented!
+            $controller->delete($id);
         }
         break;
         

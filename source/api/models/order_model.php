@@ -32,7 +32,6 @@ class OrderModel extends BaseModel
 
     public function createOrderItems($user, $orderId){
         
-        // Using sprintf to format the query in a nicer way
         $query = sprintf(
             "INSERT INTO orders_items (orderId,itemId, quantity) SELECT '%d', itemId, quantity FROM cartItems WHERE userId = '%d'",
             $orderId,

@@ -61,11 +61,13 @@ function showItem(event, id) {
         document.getElementById('single_item_price').innerHTML = '$' + data.price;
 
         document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event)">Add to my cart</button>`;
-       console.log(isAdmin);
+
         if(getCookie('isAdmin')==1){ 
             document.getElementById('single_itemUpdate_button').innerHTML = `<button class="create" onclick="showUpdateItem(event, ${data.id})">Update</button>`;
+            document.getElementById('single_itemDelete_button').innerHTML = `<button class="create" onclick="deleteItem(event, ${data.id})">Delete</button>`;
        }else{
-        document.getElementById('single_itemUpdate_button').innerHTML='';
+            document.getElementById('single_itemUpdate_button').innerHTML = '';
+            document.getElementById('single_itemDelete_button').innerHTML = '';
        }
     });
 }
@@ -103,6 +105,7 @@ function showUpdateItem(event,id) {
     htmlContainer.style.display = "block";
 
     httpRequest('GET', '/items/' + id , undefined, function (data) {
+        document.getElementById('single_item_id').innerHTML=data.id;
         document.getElementById("update_item_title").value = data.name;
         document.getElementById("update_item_descShort").value = data.descriptionShort;
         document.getElementById("update_item_descLong").value = data.descriptionLong;
@@ -113,7 +116,17 @@ function showUpdateItem(event,id) {
         document.getElementById("update_btn").innerHTML=`<button class="create" onclick="UpdateItem(event,${data.id})">Update</button`;
     });
 }
+function deleteItem(event, id){
+    event.preventDefault();
+    //var id = document.getElementById('single_item_id').innerHTML;
+    //id = parseInt(id,10);
 
+    httpRequest('DELETE', '/items/' + id , undefined, function (){
+        console.log('Succesfully deleted item', id);
+        showItems(event);
+    });
+
+}
 function UpdateItem(event,id){
     event.preventDefault();
     
@@ -125,6 +138,7 @@ function UpdateItem(event,id){
 
     var file = document.getElementById("update_item_image").files[0];
 
+    
     var data = {
         id: id,
         name: title,
@@ -133,15 +147,16 @@ function UpdateItem(event,id){
         colour: colour,
         price: price
     }
-    console.log(data);
-    httpRequest('PUT', '/items/'+id, data, function (newRecord) {
+
+    console.log(file);
+    httpRequest('PUT', '/items/'+id, data, function () {
         console.log('Successful updated of item', id);
-        if(!file==null){
-            fileUploadItems(`/items/`+id+`/image`, file, function(){
-                console.log('File uploaded successfully!');
-                document.getElementById("items_btn").click();
-            });
-        }
+        fileUploadItems(`/items/`+id+`/image`, file, function(){
+            console.log('File uploaded successfully!');
+            showItem(event, id);
+        });
+    
+        
     }); 
 }
 
@@ -169,7 +184,7 @@ function createItem(event){
 
         fileUploadItems(`/items/${newRecord.id}/image`, file, function(){
             console.log('File uploaded successfully!');
-            document.getElementById("items_btn").click();
+            showItem(event,newRecord.id);
         });
     });
 }
@@ -212,7 +227,7 @@ function fileUploadItems(url, file, callback) {
 
     formData.append('new_item_image',file);
     httpRequest.send(formData);
-  }
+}
 
   function fileUploadCategories(url, file, callback) {
     var reader = new FileReader();  
@@ -237,9 +252,7 @@ function showItems(event) {
     hideAllSections();
 
     var htmlContainer = document.getElementById('list_container');
-
     htmlContainer.style.display = "inline-flex";
-
 
     populateCategoriesList(event);
     populateItemsList(event);

@@ -8,5 +8,5 @@ CREATE TABLE `reviews` (
   `userId` int(11) NOT NULL DEFAULT 0,
   `review` text,
   `dateTimeAdded` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -14,6 +14,6 @@ CREATE TABLE `orders` (
   `status` varchar(255) NOT NULL DEFAULT '',
   `totalPrice` varchar(255) NOT NULL DEFAULT '',
   `datetimeAdded` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

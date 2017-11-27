@@ -79,7 +79,10 @@ class ItemController
 
         return $finalFile;
     }
-
+    public function delete($id){
+        
+        $this->model->delete($id);
+    }
     /**
      * getAllWithFilters checks for the valid filters and passes them to the Model to retrieve the records based on the filters
      * 

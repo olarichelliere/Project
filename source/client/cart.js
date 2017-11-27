@@ -1,21 +1,23 @@
 
 function addToCart(event){
     event.preventDefault();
-    var item_id=document.getElementById("single_item_id")
+    var item_id=document.getElementById("single_item_id").innerHTML;
+    item_id = parseInt(item_id,10);
     //var quantity = document.getElementById("new_item_quantity").value;
     var quantity=1;
 
     var data = {
         itemId: item_id
     }
-  
+    console.log(data);
+
     httpRequest('POST', '/cart/', data, function (newRecord) {
         console.log('Successful added to cart', newRecord);
     });
 }
 
 function showCart(event){
-    event.preventDefault();
+    event.preventDefault(); 
      
     hideAllSections();
 
@@ -40,8 +42,7 @@ function showCart(event){
 }
 
 function createOrder(total){
-   
-    //event.preventDefault();
+   event.preventDefault();
 
     // if payment is succeful create order and delete cart
 
@@ -49,7 +50,6 @@ function createOrder(total){
         totalPrice: total
     }
 
-    // not finished, need code from school computer
     httpRequest('POST', '/order/', data, function () {
         console.log('Successful creation of new order');
     });
