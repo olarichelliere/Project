@@ -48,6 +48,7 @@ function hideAllSections() {
 }
 
 function loaded() {
+    
     /// Button Listeners
     document.getElementById("logoLink").addEventListener('click', showItems, false);
     document.getElementById("items_btn").addEventListener('click', showItems, false);

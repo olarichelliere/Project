@@ -85,12 +85,15 @@ try {
             $data = $controller->getAll();
             
         } elseif ($method == 'PUT' && !empty($id)) {
-            $userController->isAdmin($requestHeaders);
-            $data = $controller->update($id, $requestJSON);
+            if($userController->isAdmin($requestHeaders)){
+                $data = $controller->update($id, $requestJSON);
+            }
             
         } elseif ($method == 'DELETE' && !empty($id)) {
-            $userController->isAdmin($requestHeaders);
-            $controller->delete($id);
+         
+            if($userController->isAdmin($requestHeaders)){
+                $controller->delete($id);
+            }
         }
         break;
         
@@ -102,16 +105,17 @@ try {
             $data = $controller->upload($id, $_FILES['new_category_image']);
 
         } elseif ($method == 'POST') {
-            $userController->isAdmin($requestHeaders);
-            $data = $controller->create($requestJSON);
+            if($userController->isAdmin($requestHeaders)){
+                $data = $controller->create($requestJSON);
+            }
 
         }elseif ($method == 'GET' && empty($id)) {
             $data = $controller->getAll();
             
         }elseif ($method == 'DELETE' && !empty($id)) {
-            $userController->isAdmin($requestHeaders);
-            // $controller->delete($id);
-            // TODO: Remove this after implementing it
+            if($userController->isAdmin($requestHeaders)){
+                $controller->delete($id);
+            }
             throw new Exception('Handler for DELETE method has NOT been implemented yet!', 501); // 501: Not Implemented!
         }
         break;

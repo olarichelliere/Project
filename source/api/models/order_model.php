@@ -33,7 +33,7 @@ class OrderModel extends BaseModel
     public function createOrderItems($user, $orderId){
         
         $query = sprintf(
-            "INSERT INTO orders_items (orderId,itemId, quantity) SELECT '%d', itemId, quantity FROM cartItems WHERE userId = '%d'",
+            "INSERT INTO orders_items (orderId, itemId, quantity) SELECT '%d', itemId, quantity FROM cartItems WHERE userId = '%d'",
             $orderId,
             $user
         );
@@ -42,12 +42,11 @@ class OrderModel extends BaseModel
         
         if (!$result) {
             throw new Exception("Database error: {$this->db_connection->error}", 500);
-        } 
-       
+        }  
     }
 
     public function deleteFromCart($user){
-        // Using sprintf to format the query in a nicer way
+  
         $query = sprintf(
             "DELETE FROM cartItems WHERE userId = '%d'",
             $user

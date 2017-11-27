@@ -81,8 +81,6 @@ class UserController
             throw new Exception('`Authorization` should be provided!');
         }
 
-        // "Bearer 16f684f01e6296da3a8364e597a236726d21a38a953cec28a120816115261c2736a86be219124c29a273f7a11d3069bd6572940c1b1f248434f002c9de7d29f6"
-
         $token = explode(' ', $headers['Authorization'])[1];
 
         $isValidToken = $this->model->verifyToken($token);
@@ -97,16 +95,6 @@ class UserController
         $token = explode(' ', $headers['Authorization'])[1];
         
         return $this->model->getUserByToken($token);
-
-    }
-    
-    public function getFirstName($headers)
-    {
-        $this->verify($headers);
-        
-        $token = explode(' ', $headers['Authorization'])[1];
-        
-        $user = $this->model->getUserByToken($token);
     }
 
     public function isAdmin($headers) {
@@ -115,11 +103,12 @@ class UserController
         $token = explode(' ', $headers['Authorization'])[1];
 
         $user = $this->model->getUserByToken($token);
-        //error_log("user obj for token: $user");
         
-        // change (remove the ")
+        // change (remove the exception)
         if ($user->isAdmin != 1) {
             throw new Exception("Admin Only!", 403);
+            return false;
         }
+        return true;
     }
 }

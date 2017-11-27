@@ -49,16 +49,10 @@ class UserModel extends BaseModel
     }
 
     public function logout($token){
-    $query = "DELETE FROM tokens WHERE token = '{$token}'"; 
- 
-        error_log($query);
-
+        $query = "DELETE FROM tokens WHERE token = '{$token}'";
         $result = $this->db_connection->query($query);
-        /*
-        if (!$result) {
-            throw new Exception("Database error: {$this->db_connection->error}", 500);
-        } 
-        */
+        
+        error_log($query);
     }
 
     public function storeToken($userId, $token){

@@ -11,30 +11,7 @@ class ItemModel extends BaseModel
     protected $ModelName = 'ItemModel';
 
     
-    //
-    // Save the payload as a new Item in to the Database
-    //
-    public function create($payload)
-    {
-        // Using sprintf to format the query in a nicer way
-        $query = sprintf(
-            "INSERT INTO items (name, price, descriptionShort, descriptionLong, colour) VALUES ('%s', '%s', '%s', '%s', '%s')",
-            $payload->name,
-            $payload->price,
-            $payload->descriptionShort,
-            $payload->descriptionLong,
-            $payload->colour
-        );
 
-        $result = $this->db_connection->query($query);
-        
-        if (!$result) {
-            throw new Exception("Database error: {$this->db_connection->error}", 500);
-        }
-
-        $insertedId = $this->db_connection->insert_id;
-        return $this->getOne($insertedId);
-    }
 
     public function getFilteredByTXT($searchTXT)
     {
@@ -62,8 +39,6 @@ class ItemModel extends BaseModel
 
     public function update($id, $payload)
     {
-
-
         // Using sprintf to format the query in a nicer way
         $query = sprintf(
             "UPDATE items SET name = '%s', descriptionShort = '%s', descriptionLong = '%s', colour = '%s', price = '%s' WHERE id = %d",
