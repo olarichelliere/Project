@@ -57,8 +57,6 @@ function showItem(event, id) {
         document.getElementById('single_item_price').innerHTML = '$' + data.price;
 
         document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event, ${data.id})">Add to my cart</button>`;
-       
-        console.log(isAdmin);
 
         if(getCookie('isAdmin')==1){ 
             document.getElementById('single_itemUpdate_button').innerHTML = `<button class="create" onclick="showUpdateItem(event, ${data.id})">Update</button>`;
@@ -118,7 +116,7 @@ function deleteItem(event,id){
     event.preventDefault();
     httpRequest('DELETE', '/items/' + id , undefined, function () {
         console.log('Succesfully deleted item', id);
-        showItem(event);
+        showItems(event);
     });
 
 }
@@ -145,12 +143,13 @@ function UpdateItem(event,id){
     console.log(data);
     httpRequest('PUT', '/items/'+id, data, function (newRecord) {
         console.log('Successful updated of item', id);
-        if(!file==null){
+        if(file){
             fileUploadItems(`/items/`+id+`/image`, file, function(){
                 console.log('File uploaded successfully!');
-                document.getElementById("items_btn").click();
+               
             });
         }
+        showItem(event, id);
     }); 
 }
 
@@ -184,9 +183,18 @@ function createItem(event){
 }
 
 function search(event){
+    hideAllSections();
+
+    document.getElementById('list_container').style.display = "inline-flex";
+    
+    populateCategoriesList(event);
+
+
+
+
     var htmlContainer = document.getElementById('list_items_container');
     var searchTXT=document.getElementById('searchItem').value;
-    document.getElementById('searchItem').value='';
+    //document.getElementById('searchItem').value='';
     htmlContainer.innerHTML = '';
 
     httpRequest('GET', '/items?searchTXT='+searchTXT, undefined, function (data) {

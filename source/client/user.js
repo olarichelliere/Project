@@ -12,7 +12,9 @@ function showLogin(event) {
 
 function login(event) {
     event.preventDefault();
-    
+    document.getElementById('logInUser').innerHTML='';
+
+
     var username = document.getElementById("username").value;
     var pass = document.getElementById("password").value;
 
@@ -49,7 +51,7 @@ function getFirstNameByID(){
            
         var newA = document.createElement("a");
         newA.setAttribute('id',"logout_btn");
-        newA.innerHTML=`Hi ${data.firstName}(log out)`;
+        newA.innerHTML=`Hi ${data.firstName} (log out)`;
         htmlContainer.appendChild(newA);
 
         newA.addEventListener('click',function(event){
@@ -69,6 +71,16 @@ function logUserOut(){
     });
     setCookie('token', 0, -1);
     setCookie('isAdmin', 0, -1);
+
+    var logInBtn = document.getElementById("login_btn");
+    logInBtn.innerHTML='Log In';
+    logInBtn.addEventListener('click',function(event){
+        if(event.target && event.target.id== 'login_btn'){
+            showLogin();
+        }
+    });
+
+
 
     if (document.contains(document.getElementById("new_category_li"))) {
         var elem = document.getElementById('new_category_li');
