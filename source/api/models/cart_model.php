@@ -14,6 +14,9 @@ class CartModel extends BaseModel
     // Save the payload as a new Item in to the Database
     //
     public function addToCart($itemId,$userId)
+
+// would try to use the create from base class
+
     {
         // Using sprintf to format the query in a nicer way
         $query = sprintf(
@@ -39,12 +42,11 @@ class CartModel extends BaseModel
             throw new Exception("Database error: {$this->db_connection->error}", 500);            
         };
        
-
         $total = $result->fetch_object($this->ModelName)->total;
      
         return number_format($total,2, '.', '');
     }
-
+/*
     public function getItems($userId){
         
         $items=array();
@@ -62,5 +64,15 @@ class CartModel extends BaseModel
         }
               
         return $items;
+    }
+*/
+        /**
+     * getFilteredItems returns the list of items based on the parameters specified
+     */
+    public function getFilteredItems($userId) {
+        $join_clause  = 'JOIN items ON cartItems.itemId = items.id';
+        $where_clause = "WHERE userId = {$userId}";
+
+        return $this->getFiltered($join_clause, $where_clause);
     }
 }

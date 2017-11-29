@@ -14,11 +14,12 @@ class CartController
     
         return $userCart=array(
             "total"=> $total,
-            "items"=> $this->model->getItems($userId)
+            //"items"=> $this->model->getItems($userId)
+            "items"=> $this->model->getFilteredItems($userId)
         );
     }
 
-    public function add($payload,$user){
+    public function add($payload, $user){
         // Validating the data inside the JSON
 
         if (!$user) {
@@ -26,9 +27,8 @@ class CartController
         } elseif (!array_key_exists('itemId', $payload)) {
             throw new Exception('`item` should be provided!', 400);
         }
-     
       
-        return $this->model->addToCart($payload->itemId,$user);
+        return $this->model->addToCart($payload->itemId, $user);
     }
 }
 

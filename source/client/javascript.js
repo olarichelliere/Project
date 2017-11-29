@@ -3,6 +3,7 @@ var baseURL = 'http://localhost/api';
 
 var userToken = getCookie('token');
 var isAdmin = getCookie('isAdmin');
+var username = getCookie('username');
 
 function httpRequest(method, url, payload, callback) {
     var httpRequest = new XMLHttpRequest();

@@ -103,10 +103,8 @@ class BaseModel
      *
      * @param object payload The info for the new record to be inserted in to the $TableName
      */
-    public function create($payload)
-    {
-        
-        
+    public function create($payload){
+
         $fields = array();
         foreach ($payload as $field => $val) {
             $fields[] = "$field = '$val'";
@@ -127,8 +125,8 @@ class BaseModel
         return $this->getOne($insertedId);
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
+
         $query = "DELETE FROM {$this->TableName}  WHERE id = $id";
         $result = $this->db_connection->query($query);
         
@@ -139,8 +137,8 @@ class BaseModel
         return;
     }
 
-    protected function updateFieldById($id, $field, $value)
-    {
+    protected function updateFieldById($id, $field, $value){
+        
         $query = "UPDATE {$this->TableName} SET {$field} = '{$value}' WHERE id = $id";
         $result = $this->db_connection->query($query);
         

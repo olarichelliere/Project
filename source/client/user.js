@@ -28,9 +28,11 @@ function login(event) {
 
         userToken = response.token;
         isAdmin = response.isAdmin;
+        username=response.username;
         
         setCookie('token', userToken, 1);
         setCookie('isAdmin', isAdmin, 1);
+        setCookie('username',username,1);
         
         getFirstNameByID(response.id);
     
@@ -97,6 +99,8 @@ function adminLayout(){
         
         var htmlContainer = document.getElementById('ulNav');
 
+
+        //Create the NewCategory button
         var newA= document.createElement("a");
         newA.setAttribute('id',"new_category_btn");
         newA.innerHTML = "New Categories";
@@ -112,7 +116,7 @@ function adminLayout(){
             }
         });
 
-        
+        //Create the NewItem button
         var newAitems= document.createElement("a");
         newAitems.setAttribute('id',"new_item_btn");
         newAitems.innerHTML = "New Item";
