@@ -59,8 +59,8 @@ function showItem(event, id) {
         document.getElementById('single_item_button').innerHTML = `<button class="create" onclick="addToCart(event, ${data.id})">Add to my cart</button>`;
 
         if(getCookie('isAdmin')==1){ 
-            document.getElementById('single_itemUpdate_button').innerHTML = `<button class="create" onclick="showUpdateItem(event, ${data.id})">Update</button>`;
-            document.getElementById('single_itemDelete_button').innerHTML = `<button class="create" onclick="deleteItem(event, ${data.id})">Delete</button>`;
+            document.getElementById('single_itemUpdate_button').innerHTML = `<button class="createAdmin" onclick="showUpdateItem(event, ${data.id})">Update</button>`;
+            document.getElementById('single_itemDelete_button').innerHTML = `<button class="createAdmin" onclick="deleteItem(event, ${data.id})">Delete</button>`;
        }else{
             document.getElementById('single_itemUpdate_button').innerHTML='';
             document.getElementById('single_itemDelete_button').innerHTML='';
@@ -108,7 +108,7 @@ function showUpdateItem(event,id) {
         document.getElementById("update_item_price").value = data.price;
         document.getElementById("update_item_imageView").innerHTML = `<img src="${baseURL}/../images/${data.image}"/>`; 
         
-        document.getElementById("update_btn").innerHTML=`<button class="create" onclick="UpdateItem(event,${data.id})">Update</button`;
+        document.getElementById("update_btn").innerHTML=`<button class="createAdmin" onclick="UpdateItem(event,${data.id})">Update</button`;
     });
 }
 
@@ -146,10 +146,12 @@ function UpdateItem(event,id){
         if(file){
             fileUploadItems(`/items/`+id+`/image`, file, function(){
                 console.log('File uploaded successfully!');
-               
+                showItem(event, id);
             });
+        }else{
+            showItem(event, id);
         }
-        showItem(event, id);
+        
     }); 
 }
 
@@ -188,9 +190,6 @@ function search(event){
     document.getElementById('list_container').style.display = "inline-flex";
     
     populateCategoriesList(event);
-
-
-
 
     var htmlContainer = document.getElementById('list_items_container');
     var searchTXT=document.getElementById('searchItem').value;

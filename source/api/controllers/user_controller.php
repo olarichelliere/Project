@@ -74,9 +74,9 @@ class UserController
     }
 
     public function verify($headers){
-
+        
         if (!array_key_exists('Authorization', $headers)) {
-            //user not log in, how do we send to login form?
+            //if user not log in, how do we send to login form? to make it log nicer
             
             throw new Exception('`Authorization` should be provided!');
         }
