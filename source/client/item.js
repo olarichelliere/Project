@@ -109,19 +109,12 @@ function showUpdateItem(event,id) {
         document.getElementById("update_item_imageView").innerHTML = `<img src="${baseURL}/../images/${data.image}"/>`; 
         
         document.getElementById("update_btn").innerHTML=`<button class="createAdmin" onclick="UpdateItem(event,${data.id})">Update</button`;
+        
     });
-}
-
-function deleteItem(event,id){
-    event.preventDefault();
-    httpRequest('DELETE', '/items/' + id , undefined, function () {
-        console.log('Succesfully deleted item', id);
-        showItems(event);
-    });
-
 }
 
 function UpdateItem(event,id){
+    console.log(event);
     event.preventDefault();
     
     var title = document.getElementById("update_item_title").value;
@@ -153,6 +146,15 @@ function UpdateItem(event,id){
         }
         
     }); 
+}
+
+function deleteItem(event,id){
+    event.preventDefault();
+    httpRequest('DELETE', '/items/' + id , undefined, function () {
+        console.log('Succesfully deleted item', id);
+        showItems(event);
+    });
+
 }
 
 function createItem(event){

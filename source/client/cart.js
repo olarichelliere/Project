@@ -7,7 +7,8 @@ function addToCart(event){
     var quantity=1;
 
     var data = {
-        itemId: item_id
+        itemId: item_id,
+        quantity: 1
     }
     console.log(data);
 
@@ -43,8 +44,6 @@ function showCart(event){
 
 function createOrder(total){
    event.preventDefault();
-
-    // if payment is succeful create order and delete cart
 
     var data = {
         totalPrice: total

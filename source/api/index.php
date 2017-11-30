@@ -150,9 +150,12 @@ try {
         $cartController = new CartController($model);
         
         $user = $userController->getUserByToken($requestHeaders)->userId;
-        
+      
+
+      
+
         if ($method == 'POST') {
-            $data=$cartController->add($requestJSON, $user);
+            $data=$cartController->add($requestJSON,$user);
         }elseif($method == 'GET'){
             $data = $cartController->getUserCart($user);
         }
