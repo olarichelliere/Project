@@ -14,7 +14,6 @@ class CartController
     
         return $userCart=array(
             "total"=> $total,
-            //"items"=> $this->model->getItems($userId)
             "items"=> $this->model->getFilteredItems($userId)
         );
     }

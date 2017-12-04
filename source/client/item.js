@@ -65,6 +65,65 @@ function showItem(event, id) {
             document.getElementById('single_itemUpdate_button').innerHTML='';
             document.getElementById('single_itemDelete_button').innerHTML='';
        }
+       showReviews(id);
+    });
+}
+
+function showReviews(id){
+    var htmlContainer = document.getElementById('single_item_reviews');
+    htmlContainer.innerHTML = 'Review:';
+
+    httpRequest('GET', '/reviews/' + id, undefined, function (data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var review = data[i];
+
+            htmlContainer.innerHTML += 
+                `<div class="review_container">
+                    <div class="review">Review by : ${review["userId"]}</div>
+                    <div class="review">Stars: ${review["star"]}</div>
+                    <div class="review">${review["review"]}</div>
+                    <div class="review">${review["dateTimeAdded"]}</div>
+                </div>`;
+        }
+        htmlContainer.innerHTML += `<div><button onclick="showCreateReview(event,${id})">add Review</button></div>`;
+    });
+
+}
+function showCreateReview(event,id){
+    event.preventDefault();
+    
+    hideAllSections();
+
+    var htmlContainer = document.getElementById('new_review_container');
+    htmlContainer.style.display = "inline-block";
+
+    //document.getElementById("new_review_stars").innerHTML='';
+    document.getElementById("new_review_review").value='';
+    document.getElementById("new_review_add").innerHTML=`<button class="create" onclick="createReview(event,${id})">Create</button>`;
+
+}
+
+
+function createReview(event,id){
+    event.preventDefault();
+    
+    
+    var star = document.getElementById("new_review_stars");
+    star += star.options[star.selectedIndex].value;
+    var review = document.getElementById("new_review_review").value;
+
+
+
+    var data = {
+        idItem: id,
+        star: star,
+        review: review
+    };
+
+    httpRequest('POST', '/reviews', data, function (newRecord) {
+        console.log('Successful creation of new review', newRecord);
+        showItem(event,id);
     });
 }
 
@@ -144,7 +203,6 @@ function UpdateItem(event,id){
         }else{
             showItem(event, id);
         }
-        
     }); 
 }
 

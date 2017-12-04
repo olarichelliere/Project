@@ -50,26 +50,7 @@ class CartModel extends BaseModel
      
         return number_format($total,2, '.', '');
     }
-/*
-    public function getItems($userId){
-        
-        $items=array();
-        $query = sprintf("SELECT items.id,items.name,cartItems.quantity,items.price,items.image
-                FROM cartItems 
-                JOIN items on cartItems.itemId = items.id 
-                WHERE userId=%d",$userId);
-        $result = $this->db_connection->query($query);
-        
-        if (!$result) {
-            throw new Exception("Database error: {$this->db_connection->error}", 500);            
-        }
-        while ($item = $result->fetch_object($this->ModelName)) {
-            $items[] = $item;
-        }
-              
-        return $items;
-    }
-*/
+
         /**
      * getFilteredItems returns the list of items based on the parameters specified
      */

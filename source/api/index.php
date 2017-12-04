@@ -96,7 +96,20 @@ try {
             }
         }
         break;
-        
+
+
+        case 'reviews':
+        $model = new ReviewModel($mysqli);
+        $controller = new ReviewController($model);
+
+        if ($method == 'GET' && !empty($id)) {
+            $data = $controller->getReviews($id);
+        }elseif ($method == 'POST') {
+            $user = $userController->getUserByToken($requestHeaders);
+            $data = $controller->createReviews($requestJSON,$user);
+        }
+        break;
+
         case 'categories':
         $model = new CategoryModel($mysqli);
         $controller = new CategoryController($model);

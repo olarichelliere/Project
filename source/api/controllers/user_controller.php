@@ -31,20 +31,6 @@ class UserController
         return array('token' => $token, 'isAdmin' => $user->isAdmin);
     }
 
-
-        /**
-        User is an Object with the form of:
-
-        public 'id' => string '1' (length=1)
-        public 'username' => string 'majid' (length=5)
-        public 'password' => string '$2y$10$7jDxuXHVsglkQUbCPdqoaO.hYXNd0vUDfUsBTJ8FR2mrLbxAY1AcC' (length=60)
-        public 'isAdmin' => string '1' (length=1)
-        public 'email' => string 'majidfn@gmail.com' (length=17)
-        public 'createdDateTime' => string '2017-10-26 23:44:20' (length=19)
-        public 'lastLoginDateTime' => null
-        */
-
-
     public function login($payload)
     {
         if (!array_key_exists('username', $payload)) {
@@ -76,7 +62,7 @@ class UserController
     public function verify($headers){
         
         if (!array_key_exists('Authorization', $headers)) {
-            //if user not log in, how do we send to login form? to make it log nicer
+            //if user not log in, how do we send to login form? to make it look nicer than trhor exception
             
             throw new Exception('`Authorization` should be provided!');
         }

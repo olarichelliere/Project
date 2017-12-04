@@ -46,6 +46,8 @@ function hideAllSections() {
     document.getElementById("login_container").style.display = "none";
     document.getElementById("signUp_container").style.display = "none";
     document.getElementById("cart_container").style.display = "none";
+    document.getElementById("new_review_container").style.display = "none";
+    
 }
 
 function loaded() {

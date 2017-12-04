@@ -8,7 +8,6 @@ class OrderController
         $this->model = $model;
     }
     
-
     public function createOrder($payload, $user){
       
         if (!$user) {
