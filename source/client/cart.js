@@ -33,9 +33,11 @@ function showCart(event){
             htmlContainer.innerHTML += 
                 `<div class="cart_box">
                     <div class="thumbnail"><img src="${baseURL}/../images/${item['image']}"/></div>   
+                    <div class="name"><b>${item['name']}</b></div>
+                    <div class="description">Description: ${item['descriptionShort']}</div>
                     <div class="title">Quantity: ${item['quantity']}</div>
-                    <div class="name">${item['name']}</div>
                     <div class="price">$${item['price']}</div>
+                    <button class="cartDelete" onclick="deleteItem(event,${item['cartId']})">o</button>
             </div>`;
         }    
         htmlContainer.innerHTML += `<div id="totalAmount" class="total">${data['total']}</div>`;   
@@ -51,6 +53,15 @@ function createOrder(total){
 
     httpRequest('POST', '/order/', data, function () {
         console.log('Successful creation of new order');
+    });
+}
+
+function deleteItem(event,id){
+    event.preventDefault();
+
+    httpRequest('DELETE', '/cart/' + id, undefined, function () {
+        console.log('Successful delete from cart');
+        showCart(event);
     });
 }
 

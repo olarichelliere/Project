@@ -241,8 +241,8 @@ function fileUploadItems(url, file, callback) {
     httpRequest.send(formData);
 }
 
-function showItems(event) {
-    event.preventDefault();
+function showItems() {
+    //event.preventDefault();
     
     hideAllSections();
 

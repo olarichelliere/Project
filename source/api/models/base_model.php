@@ -129,7 +129,7 @@ class BaseModel
 
         $query = "DELETE FROM {$this->TableName}  WHERE id = $id";
         $result = $this->db_connection->query($query);
-        
+        error_log("Delete SQL: $query");
         if (!$result) {
             throw new Exception("Database error: {$this->db_connection->error}", 500);            
         }

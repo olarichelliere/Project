@@ -13,12 +13,12 @@ class CartModel extends BaseModel
     //
     // Save the payload as a new Item in to the Database
     //
+
     public function addToCart($itemId,$userId)
 
 // would try to use the create from base class
 
     {
-        // Using sprintf to format the query in a nicer way
         $query = sprintf(
             "INSERT INTO cartItems (userId, itemId, quantity) VALUES ('%d', '%d', '%d')",
             $userId,
@@ -31,6 +31,10 @@ class CartModel extends BaseModel
         if (!$result) {
             throw new Exception("Database error: {$this->db_connection->error}", 500);
         }        
+    }
+
+    public function addToCart1($payload){
+        $this->insert($payload);
     }
 
     public function getTotal($userId){
@@ -72,7 +76,27 @@ class CartModel extends BaseModel
     public function getFilteredItems($userId) {
         $join_clause  = 'JOIN items ON cartItems.itemId = items.id';
         $where_clause = "WHERE userId = {$userId}";
-
+        //return parent::getFiltered($join_clause,$where_clause)
         return $this->getFiltered($join_clause, $where_clause);
+    }
+
+    public function getFiltered($join_clause = '', $where_clause = '')
+    {
+        $items = array();
+        $query = "SELECT *,cartItems.id As cartId FROM {$this->TableName} {$join_clause} {$where_clause}";
+
+        error_log("QUERY: $query");
+        
+        $result = $this->db_connection->query($query);
+
+        if (!$result) {
+            throw new Exception("Database error: {$this->db_connection->error}", 500);
+        }
+        
+        while ($item = $result->fetch_object($this->ModelName)) {
+            $items[] = $item;
+        }
+
+        return $items;
     }
 }

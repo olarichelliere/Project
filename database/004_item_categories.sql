@@ -16,3 +16,7 @@ INSERT INTO `items_categories` (`itemId`, `categoryId`) VALUES (2, 1);
 
 INSERT INTO `items_categories` (`itemId`, `categoryId`) VALUES (3, 3);
 INSERT INTO `items_categories` (`itemId`, `categoryId`) VALUES (3, 4);
+
+INSERT INTO `items_categories` (`itemId`, `categoryId`) VALUES (4, 2);
+INSERT INTO `items_categories` (`itemId`, `categoryId`) VALUES (5, 2);
+INSERT INTO `items_categories` (`itemId`, `categoryId`) VALUES (6, 3);

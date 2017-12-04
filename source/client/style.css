@@ -25,6 +25,18 @@
 
 }
 
+@font-face {
+  font-family: 'icon-worksregular';
+  src: url('./font/icon-works-webfont.eot');
+  src: url('./font/icon-works-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./font/icon-works-webfont.woff') format('woff'),
+       url('./font/icon-works-webfont.ttf') format('truetype'),
+       url('./font/icon-works-webfont.svg#icon-worksregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 
 *{
   box-sizing: border-box;
@@ -398,6 +410,22 @@ border-bottom: solid black 2px;
 overflow: auto;
 }
 
+#cart_container{
+  width:500px;
+  float: left;
+  font-size: 16px;
+  line-height: 20pt;
+}
+#cart_container .price{
+  float: left;
+}
+
+button.cartDelete{
+  font-family: 'icon-worksregular';
+  float: right;
+  height: 25px;
+  padding: 5px;
+}
 button.create{
 
 font-family: 'discoregular';

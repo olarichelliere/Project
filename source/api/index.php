@@ -149,15 +149,14 @@ try {
         $model = new CartModel($mysqli);
         $cartController = new CartController($model);
         
-        $user = $userController->getUserByToken($requestHeaders)->userId;
-      
-
-      
+        $user = $userController->getUserByToken($requestHeaders);
 
         if ($method == 'POST') {
-            $data=$cartController->add($requestJSON,$user);
+            $data=$cartController->add($requestJSON, $user->userId);
         }elseif($method == 'GET'){
-            $data = $cartController->getUserCart($user);
+            $data = $cartController->getUserCart($user->userId);
+        }elseif ($method == 'DELETE' && !empty($id)) {
+            $cartController->delete($id);
         }
         break;
 
@@ -165,12 +164,12 @@ try {
         $model = new OrderModel($mysqli);
         $orderController = new OrderController($model);
 
-        $user = $userController->getUserByToken($requestHeaders)->userId;
+        $user = $userController->getUserByToken($requestHeaders);
         
         if($method == 'POST'){
-            $orderId = $orderController->createOrder($requestJSON, $user);
-            $orderController->createOrderItems($user, $orderId);
-            $orderController->deleteFromCart($user);
+            $orderId = $orderController->createOrder($requestJSON, $user->userId);
+            $orderController->createOrderItems($user->userId, $orderId);
+            $orderController->deleteFromCart($user->userId);
         }
         break;
         

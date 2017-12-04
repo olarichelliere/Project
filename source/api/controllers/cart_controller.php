@@ -28,8 +28,12 @@ class CartController
             throw new Exception('`item` should be provided!', 400);
         }
       
-
         return $this->model->addToCart($payload->itemId, $user);
+    }
+
+    public function delete($id){
+        
+        $this->model->delete($id);
     }
 }
 
