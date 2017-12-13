@@ -76,13 +76,6 @@ function logUserOut(){
 
     var logInBtn = document.getElementById("login_btn");
     logInBtn.innerHTML='Log In';
-    logInBtn.addEventListener('click',function(event){
-        if(event.target && event.target.id== 'login_btn'){
-            showLogin();
-        }
-    });
-
-
 
     if (document.contains(document.getElementById("new_category_li"))) {
         var elem = document.getElementById('new_category_li');
@@ -97,40 +90,39 @@ function logUserOut(){
 
 function adminLayout(){
         
-        var htmlContainer = document.getElementById('ulNav');
+    var htmlContainer = document.getElementById('ulNav');
 
+    //Create the NewCategory button
+    var newA= document.createElement("a");
+    newA.setAttribute('id',"new_category_btn");
+    newA.innerHTML = "New Categories";
 
-        //Create the NewCategory button
-        var newA= document.createElement("a");
-        newA.setAttribute('id',"new_category_btn");
-        newA.innerHTML = "New Categories";
+    var newLI = document.createElement("li");
+    newLI.setAttribute('id',"new_category_li");
+    newLI.appendChild(newA);
+    htmlContainer.appendChild(newLI);
 
-        var newLI = document.createElement("li");
-        newLI.setAttribute('id',"new_category_li");
-        newLI.appendChild(newA);
-        htmlContainer.appendChild(newLI);
+    newLI.addEventListener('click',function(event){
+        if(event.target && event.target.id== 'new_category_btn'){
+            showNewCategory(event);
+        }
+    });
 
-        newLI.addEventListener('click',function(event){
-            if(event.target && event.target.id== 'new_category_btn'){
-                showNewCategory(event);
-            }
-        });
+    //Create the NewItem button
+    var newAitems= document.createElement("a");
+    newAitems.setAttribute('id',"new_item_btn");
+    newAitems.innerHTML = "New Item";
 
-        //Create the NewItem button
-        var newAitems= document.createElement("a");
-        newAitems.setAttribute('id',"new_item_btn");
-        newAitems.innerHTML = "New Item";
+    var newLIitem = document.createElement("li");
+    newLIitem.setAttribute('id',"new_item_li");
+    newLIitem.appendChild(newAitems);
+    htmlContainer.appendChild(newLIitem);
 
-        var newLIitem = document.createElement("li");
-        newLIitem.setAttribute('id',"new_item_li");
-        newLIitem.appendChild(newAitems);
-        htmlContainer.appendChild(newLIitem);
-
-        newLIitem.addEventListener('click',function(event){
-            if(event.target && event.target.id== 'new_item_btn'){
-                showNewItem(event);
-            }
-        });
+    newLIitem.addEventListener('click',function(event){
+        if(event.target && event.target.id== 'new_item_btn'){
+            showNewItem(event);
+        }
+    });
 }
 
 

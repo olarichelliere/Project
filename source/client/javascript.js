@@ -1,9 +1,9 @@
 
 var baseURL = 'http://localhost/api';
 
-var userToken;  // = getCookie('token');
-var isAdmin; // = getCookie('isAdmin');
-var username; // = getCookie('username');
+var userToken;
+var isAdmin;
+var username;
 
 function httpRequest(method, url, payload, callback) {
     var httpRequest = new XMLHttpRequest();
@@ -59,10 +59,6 @@ function loaded() {
     document.getElementById("login_btn").addEventListener('click', showLogin, false);
     document.getElementById("signUp_btn").addEventListener('click', showSignUp, false);
     document.getElementById("cart_btn").addEventListener('click', showCart, false);
-
-    //document.getElementById("categories_btn").click();
-    //document.getElementById("items_btn").click();
-    
 }
 
 hideAllSections();

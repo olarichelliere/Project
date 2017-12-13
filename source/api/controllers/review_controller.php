@@ -9,26 +9,31 @@ class ReviewController
         $this->model = $model;
     }
 
-
-
     public function getReviews($itemId)
-    {
+    {       
+         if (!$itemId) {
+            throw new Exception('`itemId` should be provided!',400);
+        } 
+
         return $this->model->getReviews($itemId);
     }
 
     public function createReviews($payload,$id){
-        /*
-        if (!array_key_exists('name', $payload)) {
-            throw new Exception('`name` should be provided!', 400);
-        } elseif (!array_key_exists('price', $payload)) {
-            throw new Exception('`price` should be provided!', 400);
+
+        if (!$id) {
+            throw new Exception('`id` should be provided!',400);
+        } elseif (!array_key_exists('review', $payload)) {
+            throw new Exception('`review` should be provided!',400);
+        } elseif (!array_key_exists('idItem', $payload)) {
+            throw new Exception('`idItem` should be provided!',400);
         }
-        */
         return $this->model->createReview($payload, $id);
     }
     
     public function delete($id){
-        
+        if (!$id) {
+            throw new Exception('`id` should be provided!',400);
+        } 
         $this->model->delete($id);
     }
 }

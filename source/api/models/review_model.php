@@ -2,10 +2,6 @@
 
 class ReviewModel extends BaseModel
 {
-    public $id;
-    public $name;
-    public $descriptionShort;
-    public $price;
 
     protected $TableName = 'reviews';
     protected $ModelName = 'ReviewModel';
@@ -15,7 +11,6 @@ class ReviewModel extends BaseModel
 
     public function createReview($payload, $id)
     {
-        // Using sprintf to format the query in a nicer way
         $query = sprintf(
             "INSERT INTO reviews SET star = '%d', review = '%s', idItem = '%d', userId = '%d'",
             $payload->star,
@@ -31,8 +26,6 @@ class ReviewModel extends BaseModel
         if (!$result) {
             throw new Exception("Database error: {$this->db_connection->error}", 500);
         }
-
-        //return $this->getOne($payload->$idItem);
     }
 
 
@@ -50,7 +43,7 @@ class ReviewModel extends BaseModel
 
     public function getReviews($itemId){
     $reviews = array();
-    $query = "SELECT * FROM {$this->TableName} WHERE idItem= $itemId";
+    $query = "SELECT * FROM {$this->TableName} JOIN users ON users.id=reviews.userId WHERE idItem= $itemId";
     $result = $this->db_connection->query($query);
 
     error_log("Generated Query is: $query");

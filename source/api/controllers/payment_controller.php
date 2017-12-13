@@ -9,14 +9,7 @@ $stripe = array(
 
 class PaymentController{
     
-    public function collect($payload){
-    /* 
-             if (!array_key_exists('name', $payload)) {
-            throw new Exception('`name` should be provided!', 400);
-        } elseif (!array_key_exists('price', $payload)) {
-            throw new Exception('`price` should be provided!', 400);
-        }    
-      */  
+    public function collect($payload){ 
         
       $token  = $payload->stripeToken;
 

@@ -16,7 +16,6 @@ class CategoryModel extends BaseModel
     //
     public function create($payload)
     {
-        // Using sprintf to format the query in a nicer way
         $query = sprintf(
             "INSERT INTO categories (name, description) VALUES ('%s','%s')",
             $payload->name,
@@ -35,7 +34,6 @@ class CategoryModel extends BaseModel
 
     public function update($id, $payload)
     {
-        // Using sprintf to format the query in a nicer way
         $query = sprintf(
             "UPDATE categories SET name = '%s' , description = '%s' WHERE id = %d",
             $payload->name,

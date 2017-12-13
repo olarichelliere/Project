@@ -12,9 +12,9 @@ class UserController
     public function create($payload)
     {
         if (!array_key_exists('username', $payload)) {
-            throw new Exception('`username` should be provided!');
+            throw new Exception('`username` should be provided!',400);
         } elseif (!array_key_exists('password', $payload)) {
-            throw new Exception('`password` should be provided!');
+            throw new Exception('`password` should be provided!',400);
         }
 
         $payload->password = password_hash($payload->password, PASSWORD_BCRYPT);
@@ -34,9 +34,9 @@ class UserController
     public function login($payload)
     {
         if (!array_key_exists('username', $payload)) {
-            throw new Exception('`username` should be provided!');
+            throw new Exception('`username` should be provided!',400);
         } elseif (!array_key_exists('password', $payload)) {
-            throw new Exception('`password` should be provided!');
+            throw new Exception('`password` should be provided!',400);
         }
         
         $user = $this->model->getUserByUsername($payload->username);
@@ -61,9 +61,7 @@ class UserController
 
     public function verify($headers){
         
-        if (!array_key_exists('Authorization', $headers)) {
-            //if user not log in, how do we send to login form? to make it look nicer than trhor exception
-            
+        if (!array_key_exists('Authorization', $headers)) {            
             throw new Exception('`Authorization` should be provided!');
         }
 
@@ -90,7 +88,6 @@ class UserController
 
         $user = $this->model->getUserByToken($token);
         
-        // change (remove the exception)
         if ($user->isAdmin != 1) {
             throw new Exception("Admin Only!", 403);
             return false;

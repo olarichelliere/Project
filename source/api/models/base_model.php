@@ -122,7 +122,8 @@ class BaseModel
         }
         
         $insertedId = $this->db_connection->insert_id;
-        return $this->getOne($insertedId);
+        //return $this->getOne($insertedId);
+        return $insertedId;
     }
 
     public function delete($id){

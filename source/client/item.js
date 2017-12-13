@@ -26,6 +26,19 @@ function populateItemsList(event){
     });
 }
 
+function populateCatList(){
+    var htmlContainer = document.getElementById('new_item_category_select');
+    htmlContainer.innerHTML = '';
+
+    httpRequest('GET', '/categories', undefined, function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var category = data[i];
+            htmlContainer.innerHTML += 
+                `<option value="${category['id']}">${category["name"]}</option>`;
+        }
+    });
+}
+
 function itemBox(item){
     var itemDiv= `<div class="item_box">
                     <a href="#" onclick="showItem(event, ${item['id']})">
@@ -71,19 +84,20 @@ function showItem(event, id) {
 
 function showReviews(id){
     var htmlContainer = document.getElementById('single_item_reviews');
-    htmlContainer.innerHTML = 'Review:';
+    htmlContainer.innerHTML = 'Reviews:';
 
     httpRequest('GET', '/reviews/' + id, undefined, function (data) {
         console.log(data);
         for (var i = 0; i < data.length; i++) {
             var review = data[i];
 
+            var javaDate = new Date(review["dateTimeAdded"]);
+
             htmlContainer.innerHTML += 
                 `<div class="review_container">
-                    <div class="review">Review by : ${review["userId"]}</div>
-                    <div class="review">Stars: ${review["star"]}</div>
+                    <div class="review">Review by : ${review["firstName"]} on ${javaDate.toLocaleDateString()} </div>
+                    <div class="review">Stars: ${review["star"]}/5</div>
                     <div class="review">${review["review"]}</div>
-                    <div class="review">${review["dateTimeAdded"]}</div>
                 </div>`;
         }
         htmlContainer.innerHTML += `<div><button onclick="showCreateReview(event,${id})">add Review</button></div>`;
@@ -98,26 +112,21 @@ function showCreateReview(event,id){
     var htmlContainer = document.getElementById('new_review_container');
     htmlContainer.style.display = "inline-block";
 
-    //document.getElementById("new_review_stars").innerHTML='';
     document.getElementById("new_review_review").value='';
     document.getElementById("new_review_add").innerHTML=`<button class="create" onclick="createReview(event,${id})">Create</button>`;
-
 }
-
 
 function createReview(event,id){
     event.preventDefault();
     
     
     var star = document.getElementById("new_review_stars");
-    star += star.options[star.selectedIndex].value;
+    var starSelected = star.options[star.selectedIndex].value;
     var review = document.getElementById("new_review_review").value;
-
-
 
     var data = {
         idItem: id,
-        star: star,
+        star: starSelected,
         review: review
     };
 
@@ -126,7 +135,6 @@ function createReview(event,id){
         showItem(event,id);
     });
 }
-
 
 function showNewItem(event) {
     event.preventDefault();
@@ -142,6 +150,7 @@ function showNewItem(event) {
     document.getElementById("new_item_colour").value = '';
     document.getElementById("new_item_price").value = '';
     document.getElementById("new_item_image").value = '';
+    populateCatList();
 }
 
 function showUpdateItem(event,id) {
@@ -223,6 +232,7 @@ function createItem(event){
     var descLong = document.getElementById("new_item_descLong").value;
     var price = document.getElementById("new_item_price").value;
     var colour = document.getElementById("new_item_colour").value;
+    var category = document.getElementById("new_item_category_select").value;
 
     var file = document.getElementById("new_item_image").files[0];
 
@@ -241,6 +251,15 @@ function createItem(event){
             console.log('File uploaded successfully!');
             document.getElementById("items_btn").click();
         });
+      
+        var dataCategory = {
+            itemId: newRecord.id,
+            categoryId: category
+        }
+
+        httpRequest('POST', '/itemcategories/', dataCategory, function () {
+            console.log('Successful creation of new itemcategory');
+        });
     });
 }
 
@@ -253,7 +272,6 @@ function search(event){
 
     var htmlContainer = document.getElementById('list_items_container');
     var searchTXT=document.getElementById('searchItem').value;
-    //document.getElementById('searchItem').value='';
     htmlContainer.innerHTML = '';
 
     httpRequest('GET', '/items?searchTXT='+searchTXT, undefined, function (data) {
@@ -263,7 +281,6 @@ function search(event){
         }
     });
 }
-
 
 function fileUploadItems(url, file, callback) {
     var reader = new FileReader();  
@@ -300,14 +317,12 @@ function fileUploadItems(url, file, callback) {
 }
 
 function showItems() {
-    //event.preventDefault();
     
     hideAllSections();
 
     var htmlContainer = document.getElementById('list_container');
 
     htmlContainer.style.display = "inline-flex";
-
 
     populateCategoriesList(event);
     populateItemsList(event);

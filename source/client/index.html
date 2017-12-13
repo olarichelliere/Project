@@ -20,10 +20,10 @@
 		<div id="nav">
 			<ul id="ulNav">
 				<div id="logInUser"></div>	
-				<li><a  id="items_btn">Items</a></li>
-				<li><a  id="categories_btn">Categories</a></li>
+				<li><a id="items_btn">Items</a></li>
+				<li><a id="categories_btn">Categories</a></li>
 				<li><a id="login_btn">Login</a></li>
-				<li><a  id="cart_btn">Cart</a></li>
+				<li><a id="cart_btn">Cart</a></li>
 			</ul>
 		</div>
 		<div class="search_box">
@@ -81,6 +81,7 @@
 				<div class="separator"></div>
 				<div class="block"><label>Image:</label><input name="new_item_image" type="file" id="new_item_image"></div>
 				<div class="separator"></div>
+				<div class="block"><label>Category:</label><div id="new_item_category"><select id="new_item_category_select"></select></div></div>
 				<button class="create" onclick="createItem(event)">Create</button>
 			</div>
 			<div id="update_item_container">

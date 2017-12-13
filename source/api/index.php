@@ -107,6 +107,7 @@ try {
         }elseif ($method == 'POST') {
             $user = $userController->getUserByToken($requestHeaders);
             $data = $controller->createReviews($requestJSON,$user);
+
         }
         break;
 
@@ -129,10 +130,19 @@ try {
             if($userController->isAdmin($requestHeaders)){
                 $controller->delete($id);
             }
-            throw new Exception('Handler for DELETE method has NOT been implemented yet!', 501); // 501: Not Implemented!
         }
         break;
 
+        case 'itemcategories':
+        $model = new ItemcategoryModel($mysqli);
+        $controller = new ItemcategoryController($model);
+        
+        if ($method == 'POST') {
+            if($userController->isAdmin($requestHeaders)){
+                $data = $controller->create($requestJSON);
+            }
+        }
+        break;
 
         case 'users':
         if ($method == 'POST') {
@@ -163,14 +173,15 @@ try {
         $cartController = new CartController($model);
         
         $user = $userController->getUserByToken($requestHeaders);
-
-        if ($method == 'POST') {
-            $data=$cartController->add($requestJSON, $user->userId);
-        }elseif($method == 'GET'){
-            $data = $cartController->getUserCart($user->userId);
-        }elseif ($method == 'DELETE' && !empty($id)) {
-            $cartController->delete($id);
-        }
+        //if($user){
+            if ($method == 'POST') {
+                $data=$cartController->add($requestJSON, $user->userId);
+            }elseif($method == 'GET'){
+                $data = $cartController->getUserCart($user->userId);
+            }elseif ($method == 'DELETE' && !empty($id)) {
+                $cartController->delete($id);
+            }
+        //}
         break;
 
         case 'order':

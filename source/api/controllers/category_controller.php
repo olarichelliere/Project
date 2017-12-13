@@ -21,14 +21,12 @@ class CategoryController
 
     public function create($payload)
     {
-        // Validating the data inside the JSON
-        // We make sure the `title` and `price` are provided
-
         if (!array_key_exists('name', $payload)) {
             throw new Exception('`name` should be provided!', 400);
         } 
 
-        return $this->model->create($payload);
+        $newId= $this->model->create($payload);
+        return $this->model->getOne($newId);
     }
 
     public function upload($id, $file)
@@ -82,5 +80,10 @@ class CategoryController
         }
 
         return $this->model->getFilteredItems($categoryId);
+    }
+
+    public function delete($id){
+        
+        $this->model->delete($id);
     }
 }

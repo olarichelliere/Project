@@ -15,9 +15,6 @@ class CartModel extends BaseModel
     //
 
     public function addToCart($itemId,$userId)
-
-// would try to use the create from base class
-
     {
         $query = sprintf(
             "INSERT INTO cartItems (userId, itemId, quantity) VALUES ('%d', '%d', '%d')",
@@ -31,10 +28,6 @@ class CartModel extends BaseModel
         if (!$result) {
             throw new Exception("Database error: {$this->db_connection->error}", 500);
         }        
-    }
-
-    public function addToCart1($payload){
-        $this->insert($payload);
     }
 
     public function getTotal($userId){
@@ -51,13 +44,12 @@ class CartModel extends BaseModel
         return number_format($total,2, '.', '');
     }
 
-        /**
+    /**
      * getFilteredItems returns the list of items based on the parameters specified
      */
     public function getFilteredItems($userId) {
         $join_clause  = 'JOIN items ON cartItems.itemId = items.id';
         $where_clause = "WHERE userId = {$userId}";
-        //return parent::getFiltered($join_clause,$where_clause)
         return $this->getFiltered($join_clause, $where_clause);
     }
 

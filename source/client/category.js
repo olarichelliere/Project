@@ -17,10 +17,6 @@ function populateCategoriesList(event){
     });
 }
 
-
-
-
-
 function showCategories(event) {
     event.preventDefault();
     

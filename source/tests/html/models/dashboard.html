@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/api/models</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../.css/bootstrap.min.css" rel="stylesheet">
+  <link href="../.css/nv.d3.min.css" rel="stylesheet">
+  <link href="../.css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../.js/html5shiv.min.js"></script>
+  <script src="../.js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">/var/www/html/api</a></li>
+        <li><a href="index.html">models</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="category_model.php.html#3">CategoryModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="item_model.php.html#3">ItemModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="itemcategory_model.php.html#3">ItemcategoryModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="order_model.php.html#3">OrderModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="review_model.php.html#3">ReviewModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="base_model.php.html#11">BaseModel</a></td><td class="text-right">16%</td></tr>
+       <tr><td><a href="cart_model.php.html#3">CartModel</a></td><td class="text-right">32%</td></tr>
+       <tr><td><a href="user_model.php.html#3">UserModel</a></td><td class="text-right">40%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="base_model.php.html#11">BaseModel</a></td><td class="text-right">186</td></tr>
+       <tr><td><a href="item_model.php.html#3">ItemModel</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="category_model.php.html#3">CategoryModel</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="order_model.php.html#3">OrderModel</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="review_model.php.html#3">ReviewModel</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="user_model.php.html#3">UserModel</a></td><td class="text-right">36</td></tr>
+       <tr><td><a href="cart_model.php.html#3">CartModel</a></td><td class="text-right">28</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="base_model.php.html#33"><abbr title="BaseModel::getFiltered">getFiltered</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="item_model.php.html#64"><abbr title="ItemModel::updateImage">updateImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="user_model.php.html#50"><abbr title="UserModel::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="user_model.php.html#32"><abbr title="UserModel::getUserByToken">getUserByToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="user_model.php.html#13"><abbr title="UserModel::getUserByUsername">getUserByUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="review_model.php.html#44"><abbr title="ReviewModel::getReviews">getReviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="review_model.php.html#36"><abbr title="ReviewModel::getFilteredItems">getFilteredItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="review_model.php.html#12"><abbr title="ReviewModel::createReview">createReview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="order_model.php.html#48"><abbr title="OrderModel::deleteFromCart">deleteFromCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="order_model.php.html#33"><abbr title="OrderModel::createOrderItems">createOrderItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="order_model.php.html#14"><abbr title="OrderModel::createOrder">createOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="itemcategory_model.php.html#11"><abbr title="ItemcategoryModel::getFilteredItems">getFilteredItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="item_model.php.html#73"><abbr title="ItemModel::getFilteredItems">getFilteredItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="item_model.php.html#40"><abbr title="ItemModel::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="base_model.php.html#56"><abbr title="BaseModel::getAll">getAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="item_model.php.html#16"><abbr title="ItemModel::getFilteredByTXT">getFilteredByTXT</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="category_model.php.html#64"><abbr title="CategoryModel::getFilteredItems">getFilteredItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="category_model.php.html#56"><abbr title="CategoryModel::updateImage">updateImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="category_model.php.html#35"><abbr title="CategoryModel::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="category_model.php.html#17"><abbr title="CategoryModel::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="cart_model.php.html#56"><abbr title="CartModel::getFiltered">getFiltered</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="cart_model.php.html#50"><abbr title="CartModel::getFilteredItems">getFilteredItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="cart_model.php.html#33"><abbr title="CartModel::getTotal">getTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="base_model.php.html#141"><abbr title="BaseModel::updateFieldById">updateFieldById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="base_model.php.html#129"><abbr title="BaseModel::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="base_model.php.html#106"><abbr title="BaseModel::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="base_model.php.html#80"><abbr title="BaseModel::getOne">getOne</abbr></a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="user_model.php.html#74"><abbr title="UserModel::verifyToken">verifyToken</abbr></a></td><td class="text-right">85%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="base_model.php.html#33"><abbr title="BaseModel::getFiltered">getFiltered</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="cart_model.php.html#56"><abbr title="CartModel::getFiltered">getFiltered</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="user_model.php.html#32"><abbr title="UserModel::getUserByToken">getUserByToken</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="user_model.php.html#13"><abbr title="UserModel::getUserByUsername">getUserByUsername</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="review_model.php.html#44"><abbr title="ReviewModel::getReviews">getReviews</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="base_model.php.html#56"><abbr title="BaseModel::getAll">getAll</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="item_model.php.html#16"><abbr title="ItemModel::getFilteredByTXT">getFilteredByTXT</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="base_model.php.html#106"><abbr title="BaseModel::create">create</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="cart_model.php.html#33"><abbr title="CartModel::getTotal">getTotal</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="category_model.php.html#17"><abbr title="CategoryModel::create">create</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="category_model.php.html#35"><abbr title="CategoryModel::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="base_model.php.html#141"><abbr title="BaseModel::updateFieldById">updateFieldById</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="item_model.php.html#40"><abbr title="ItemModel::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="order_model.php.html#14"><abbr title="OrderModel::createOrder">createOrder</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="order_model.php.html#33"><abbr title="OrderModel::createOrderItems">createOrderItems</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="order_model.php.html#48"><abbr title="OrderModel::deleteFromCart">deleteFromCart</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="review_model.php.html#12"><abbr title="ReviewModel::createReview">createReview</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="base_model.php.html#129"><abbr title="BaseModel::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="base_model.php.html#80"><abbr title="BaseModel::getOne">getOne</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="user_model.php.html#74"><abbr title="UserModel::verifyToken">verifyToken</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 5.2.2</a> using <a href="https://secure.php.net/" target="_top">PHP 7.1.10</a> with <a href="https://xdebug.org/">Xdebug 2.5.5</a> and <a href="https://phpunit.de/">PHPUnit 6.4.3</a> at Wed Dec 13 17:02:41 UTC 2017.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../.js/jquery.min.js" type="text/javascript"></script>
+  <script src="../.js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../.js/holder.min.js" type="text/javascript"></script>
+  <script src="../.js/d3.min.js" type="text/javascript"></script>
+  <script src="../.js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([5,0,1,0,1,1,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([26,0,0,0,0,0,0,0,0,2,2,1], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[16.3265306122449,17,"<a href=\"base_model.php.html#11\">BaseModel<\/a>"],[32.142857142857146,8,"<a href=\"cart_model.php.html#3\">CartModel<\/a>"],[0,6,"<a href=\"category_model.php.html#3\">CategoryModel<\/a>"],[0,7,"<a href=\"item_model.php.html#3\">ItemModel<\/a>"],[0,1,"<a href=\"itemcategory_model.php.html#3\">ItemcategoryModel<\/a>"],[0,6,"<a href=\"order_model.php.html#3\">OrderModel<\/a>"],[0,6,"<a href=\"review_model.php.html#3\">ReviewModel<\/a>"],[40.54054054054054,11,"<a href=\"user_model.php.html#3\">UserModel<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,2,"<a href=\"base_model.php.html#22\">BaseModel::__construct<\/a>"],[0,3,"<a href=\"base_model.php.html#33\">BaseModel::getFiltered<\/a>"],[0,3,"<a href=\"base_model.php.html#56\">BaseModel::getAll<\/a>"],[83.33333333333334,2,"<a href=\"base_model.php.html#80\">BaseModel::getOne<\/a>"],[0,3,"<a href=\"base_model.php.html#106\">BaseModel::create<\/a>"],[0,2,"<a href=\"base_model.php.html#129\">BaseModel::delete<\/a>"],[0,2,"<a href=\"base_model.php.html#141\">BaseModel::updateFieldById<\/a>"],[90,2,"<a href=\"cart_model.php.html#17\">CartModel::addToCart<\/a>"],[0,2,"<a href=\"cart_model.php.html#33\">CartModel::getTotal<\/a>"],[0,1,"<a href=\"cart_model.php.html#50\">CartModel::getFilteredItems<\/a>"],[0,3,"<a href=\"cart_model.php.html#56\">CartModel::getFiltered<\/a>"],[0,2,"<a href=\"category_model.php.html#17\">CategoryModel::create<\/a>"],[0,2,"<a href=\"category_model.php.html#35\">CategoryModel::update<\/a>"],[0,1,"<a href=\"category_model.php.html#56\">CategoryModel::updateImage<\/a>"],[0,1,"<a href=\"category_model.php.html#64\">CategoryModel::getFilteredItems<\/a>"],[0,3,"<a href=\"item_model.php.html#16\">ItemModel::getFilteredByTXT<\/a>"],[0,2,"<a href=\"item_model.php.html#40\">ItemModel::update<\/a>"],[0,1,"<a href=\"item_model.php.html#64\">ItemModel::updateImage<\/a>"],[0,1,"<a href=\"item_model.php.html#73\">ItemModel::getFilteredItems<\/a>"],[0,1,"<a href=\"itemcategory_model.php.html#11\">ItemcategoryModel::getFilteredItems<\/a>"],[0,2,"<a href=\"order_model.php.html#14\">OrderModel::createOrder<\/a>"],[0,2,"<a href=\"order_model.php.html#33\">OrderModel::createOrderItems<\/a>"],[0,2,"<a href=\"order_model.php.html#48\">OrderModel::deleteFromCart<\/a>"],[0,2,"<a href=\"review_model.php.html#12\">ReviewModel::createReview<\/a>"],[0,1,"<a href=\"review_model.php.html#36\">ReviewModel::getFilteredItems<\/a>"],[0,3,"<a href=\"review_model.php.html#44\">ReviewModel::getReviews<\/a>"],[0,3,"<a href=\"user_model.php.html#13\">UserModel::getUserByUsername<\/a>"],[0,3,"<a href=\"user_model.php.html#32\">UserModel::getUserByToken<\/a>"],[0,1,"<a href=\"user_model.php.html#50\">UserModel::logout<\/a>"],[90,2,"<a href=\"user_model.php.html#57\">UserModel::storeToken<\/a>"],[85.71428571428571,2,"<a href=\"user_model.php.html#74\">UserModel::verifyToken<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

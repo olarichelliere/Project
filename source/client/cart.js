@@ -3,7 +3,6 @@ function addToCart(event){
     event.preventDefault();
     var item_id=document.getElementById("single_item_id").innerHTML;
     item_id = parseInt(item_id,10);
-    //var quantity = document.getElementById("new_item_quantity").value;
     var quantity=1;
 
     var data = {
@@ -37,7 +36,7 @@ function showCart(event){
                     <div class="description">Description: ${item['descriptionShort']}</div>
                     <div class="title">Quantity: ${item['quantity']}</div>
                     <div class="price">$${item['price']}</div>
-                    <button class="cartDelete" onclick="deleteItem(event,${item['cartId']})">o</button>
+                    <button class="cartDelete" onclick="deleteCartItem(event,${item['cartId']})">o</button>
             </div>`;
         }    
         htmlContainer.innerHTML += `<div id="totalAmount" class="total">${data['total']}</div>`;   
@@ -56,7 +55,7 @@ function createOrder(total){
     });
 }
 
-function deleteItem(event,id){
+function deleteCartItem(event,id){
     event.preventDefault();
 
     httpRequest('DELETE', '/cart/' + id, undefined, function () {

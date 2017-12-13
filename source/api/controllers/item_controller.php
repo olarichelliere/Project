@@ -32,8 +32,6 @@ class ItemController
 
     public function create($payload)
     {
-        // Validating the data inside the JSON
-        // We make sure the `title` and `price` are provided
 
         if (!array_key_exists('name', $payload)) {
             throw new Exception('`name` should be provided!', 400);
@@ -41,7 +39,8 @@ class ItemController
             throw new Exception('`price` should be provided!', 400);
         }
 
-        return $this->model->create($payload);
+        $newId= $this->model->create($payload);
+        return $this->model->getOne($newId);
     }
 
     public function upload($id, $file)
@@ -83,11 +82,7 @@ class ItemController
         
         $this->model->delete($id);
     }
-    /**
-     * getAllWithFilters checks for the valid filters and passes them to the Model to retrieve the records based on the filters
-     * 
-     * categoryid should be an integer value. All the values from $_GET are string we need `intval` function to extract the integer value.
-     */
+ 
     public function getAllWithFilters($filters) {
 
         if (array_key_exists('categoryid', $filters)) {

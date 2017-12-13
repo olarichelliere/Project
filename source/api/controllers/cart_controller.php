@@ -31,7 +31,9 @@ class CartController
     }
 
     public function delete($id){
-        
+        if (!$id) {
+            throw new Exception('`id` should be provided!', 400);
+        }
         $this->model->delete($id);
     }
 }
